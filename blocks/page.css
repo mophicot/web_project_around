@@ -1,16 +1,18 @@
 .page {
   margin: 0;
+
   font-family: "Inter", Arial, sans-serif;
   letter-spacing: 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
   color: #ffffff;
+
   background-color: #000000;
 
   /* por heredar */
   display: flex;
   flex-direction: column;
-  font-size: 16px;
-  line-height: 163%;
-  font-weight: 400;
 
   max-width: 100%;
   /* Suavizado de las fuentes en Firefox
