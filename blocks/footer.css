@@ -11,8 +11,8 @@
   width: calc((880% / 1280) * 100);
   max-width: 880px;
   height: auto;
-  padding-top: 67px;
-  padding-bottom: 60px;
+  padding-top: 5.2%;
+  padding-bottom: 4.7%;
 }
 
 .footer-banner__copyright {

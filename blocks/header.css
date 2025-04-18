@@ -14,13 +14,13 @@
   max-width: 880px;
   height: auto;
   justify-content: space-between;
-  padding-top: 45px;
+  padding-top: 3.5%;
 }
 
 .header-banner__logo {
   margin: 0;
   box-sizing: border-box;
-  border: 1px solid lime;
+  /* border: 1px solid lime; */
   width: calc((173% / 880) * 100);
 }
 
