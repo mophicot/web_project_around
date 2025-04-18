@@ -1,0 +1,98 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* margin: 0; */
+  /* box-sizing: border-box; */
+}
+
+.header-banner {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: calc((880% / 1280) * 100);
+  max-width: 880px;
+  height: auto;
+  justify-content: space-between;
+  padding-top: 45px;
+}
+
+.header-banner__logo {
+  margin: 0;
+  box-sizing: border-box;
+  border: 1px solid lime;
+  width: calc((173% / 880) * 100);
+}
+
+.header-banner__line {
+  margin: 0;
+  box-sizing: border-box;
+  border: 1px solid #545454;
+  margin-top: calc((30% / 880) * 100);
+}
+
+/* ++++++++++  MEDIUM  calc((88% / 768) * 100); +++++++++ */
+/*
+@media screen and (min-width: 544px) and (max-width: 1023px) {
+  .header__logo {
+    max-width: calc((254% / 768) * 100);
+    max-height: calc((66% / 768) * 100);
+    margin-top: calc((30% / 768) * 100);
+  }
+
+  .header__title {
+    font-weight: 900;
+    line-height: 79px;
+    font-size: 75px;
+    margin-top: calc((90% / 768) * 100);
+    max-width: calc((530% / 768) * 100);
+    max-height: calc((158% / 768) * 100);
+  }
+
+  .header__subtitle {
+    line-height: 36px;
+    font-size: 30px;
+    margin-top: calc((25% / 768) * 100);
+    max-width: calc((720% / 768) * 100);
+    max-height: calc((72% / 768) * 100);
+  }
+
+  .header__photo {
+    margin-top: calc((30% / 768) * 100);
+    max-width: calc((768% / 768) * 100);
+    max-height: calc((480% / 768) * 100);
+  }
+} */
+
+/* ++++++++++  SMALL  calc((64% / 320) * 100); +++++++++ */
+/*
+@media screen and (max-width: 543px) {
+  .header__logo {
+    max-width: calc((188% / 320) * 100);
+    max-height: calc((52% / 320) * 100);
+    margin-top: calc((20% / 320) * 100);
+  }
+
+  .header__title {
+    font-weight: 900;
+    line-height: 44px;
+    font-size: 40px;
+    margin-top: calc((50% / 320) * 100);
+    max-width: calc((228% / 320) * 100);
+    max-height: calc((88% / 320) * 100);
+  }
+
+  .header__subtitle {
+    line-height: 20px;
+    font-size: 16px;
+    margin-top: calc((16% / 320) * 100);
+    max-width: calc((288% / 320) * 100);
+    max-height: calc((40% / 320) * 100);
+  }
+
+  .header__photo {
+    margin-top: calc((40% / 320) * 100);
+    max-width: calc((320% / 320) * 100);
+    max-height: calc((200% / 320) * 100);
+  }
+} */
