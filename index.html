@@ -26,7 +26,6 @@
             alt="Alrededor de los EE.UU."
             class="header-banner__logo"
           />
-          <div class="header-banner__line"></div>
         </div>
       </header>
       <!-- MAIN -->
@@ -60,7 +59,7 @@
             <img
               src="./images/AddButton.png"
               alt="Imagen de un signo de suma"
-              class="profile-id__add"
+              class="profile-id__add-button"
             />
           </div>
         </section>
@@ -94,7 +93,9 @@
               </div>
               <div class="element__footer">
                 <h2 class="element__title">Lago Louise</h2>
-                <div class="element__like-button"></div>
+                <div
+                  class="element__like-button element__like-button_active"
+                ></div>
               </div>
             </div>
             <!-- ++++++++++++++++++++++++++++++++++++ FIN - Lago Louise -->
@@ -162,6 +163,38 @@
               </div>
             </div>
             <!-- ++++++++++++++++++++++++++++++++++++ FIN - Lago di Braies... -->
+          </div>
+        </section>
+        <!-- +++++++++++++++++++++++++++++++POPUP -->
+        <section class="edit-box">
+          <div class="popup popup_opened">
+            <!-- <div class="popup__container"> -->
+            <form class="form">
+              <h2 class="form__title">Editar perfil</h2>
+              <fieldset class="form__fieldset">
+                <input
+                  type="text"
+                  class="form__input"
+                  id="name"
+                  name="name"
+                  placeholder="Nombre"
+                  required
+                />
+
+                <input
+                  type="text"
+                  class="form__input"
+                  id="about"
+                  name="about"
+                  placeholder="Acerca de mí"
+                  required
+                />
+
+                <button type="submit" class="form__button">Guardar</button>
+              </fieldset>
+              <button type="button" class="form__close-button"></button>
+            </form>
+            <!-- </div> -->
           </div>
         </section>
       </main>

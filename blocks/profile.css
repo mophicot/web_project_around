@@ -22,7 +22,7 @@
   justify-content: space-between;
   align-items: center;
 
-  border: 1px solid cyan;
+  /* border: 1px solid cyan; */
 }
 
 .profile-id {
@@ -39,7 +39,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid yellow;
+
+  /* border: 1px solid yellow; */
 }
 
 .profile-id__avatar-frame {
@@ -54,7 +55,7 @@
   /* justify-content: center; */
   /* align-items: center; */
 
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .profile-id__avatar {
@@ -64,8 +65,12 @@
   /* width: 120px; */
 }
 
-.profile-id__add {
+.profile-id__add-button {
   width: calc((150% / 880) * 100);
+}
+
+.profile-id__add-button:hover {
+  opacity: 60%;
 }
 
 .explorer-info {
@@ -75,8 +80,9 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
-  border: 1px solid white;
   width: calc((415% / 565) * 100);
+
+  /* border: 1px solid white; */
 }
 
 .explorer-info__item {
@@ -90,24 +96,26 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 142%;
-  border: 1px solid lime;
+
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  letter-spacing: 0;
+
+  /* letter-spacing: 0; */
+  /* border: 1px solid lime; */
 }
 
 .explorer-info__job {
-  /* font-family: Inter;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 100%;
-  letter-spacing: 0%; */
   margin: 0;
-  border: 1px solid fuchsia;
+
+  /* border: 1px solid fuchsia; */
 }
 
 .explorer-info__edit {
   /* nada al parecer */
+}
+
+.explorer-info__edit:hover {
+  opacity: 60%;
 }

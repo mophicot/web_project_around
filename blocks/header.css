@@ -2,8 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin: 0; */
-  /* box-sizing: border-box; */
 }
 
 .header-banner {
@@ -15,20 +13,20 @@
   height: auto;
   justify-content: space-between;
   padding-top: 3.5%;
+  padding-bottom: 3.25%;
+
+  border: 1px solid #c4c4c4;
+  border-style: none none solid;
+
+  /* border: 1px solid fuchsia; */
 }
 
 .header-banner__logo {
   margin: 0;
   box-sizing: border-box;
-  /* border: 1px solid lime; */
   width: calc((173% / 880) * 100);
-}
 
-.header-banner__line {
-  margin: 0;
-  box-sizing: border-box;
-  border: 1px solid #545454;
-  margin-top: calc((30% / 880) * 100);
+  /* border: 1px solid lime; */
 }
 
 /* ++++++++++  MEDIUM  calc((88% / 768) * 100); +++++++++ */
