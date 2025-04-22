@@ -13,30 +13,27 @@
   height: auto;
   padding-top: 5.2%;
   padding-bottom: 4.7%;
-
-  /* background-color: yellow; */
 }
 
 .footer-banner__copyright {
   margin: 0;
   color: #545454;
-  font-size: 100%;
 }
-
-/* ++++++++++  MEDIUM   +++++++++ */
-
-/* @media screen and (min-width: 544px) and (max-width: 1023px) {
-  .footer__copyright {
-    margin-top: calc((88% / 768) * 100);
-  }
-} */
 
 /* ++++++++++  SMALL   +++++++++ */
 
-/*
-@media screen and (max-width: 543px) {
-  .footer__copyright {
-    line-height: 14px;
-    margin-top: calc((64% / 320) * 100);
+@media screen and (max-width: 800px) {
+  .footer-banner {
+    margin-top: 16.5%;
+    margin-bottom: 12%;
+    padding: 0;
+    width: 100%;
   }
-} */
+
+  .footer-banner__copyright {
+    margin: 0;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 5%;
+  }
+}

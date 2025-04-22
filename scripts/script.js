@@ -1,3 +1,64 @@
+// 1.- SELECCION EN EL DOM +++++++++++++++++++++++++
+// Popup
+const buttonEdit = document.querySelector(".explorer-info__edit");
+const buttonClose = document.querySelector(".form__close-button");
+const popup = document.querySelector(".popup");
+
+//Cambiar nombre
+const form = document.querySelector(".form");
+const nameInput = document.querySelector(".form__name");
+const jobInput = document.querySelector(".form__job");
+const explorerName = document.querySelector(".explorer-info__name-complete");
+const explorerJob = document.querySelector(".explorer-info__job");
+
+//Botón Me Gusta
+const buttonLike = document.querySelector(".element__like-button");
+
+//2.- FUNCIONALIDAD +++++++++++++++++++++++++++++++
+// Popup
+// --abrir
+function openPopup() {
+  popup.classList.add("active");
+}
+// --cerrar
+function closePopup() {
+  popup.classList.remove("active");
+}
+
+//Cambiar nombre
+//--recolección, asignación y actualización
+function handleSubmit(event) {
+  //evitar que se ejecute el submit
+  event.preventDefault();
+  //guardar datos en value
+  const name = nameInput.value;
+  const job = jobInput.value;
+  explorerName.textContent = name;
+  explorerJob.textContent = job;
+}
+
+//Botón Me Gusta
+// --like
+function likeActive() {
+  buttonLike.classList.add("active");
+}
+
+//3.- AÑADIR EVENTOS +++++++++++++++++++++++++++++++
+
+// Popup
+// --abrir
+buttonEdit.addEventListener("click", openPopup);
+// --cerrar
+buttonClose.addEventListener("click", closePopup);
+
+//Cambiar nombre
+form.addEventListener("submit", handleSubmit);
+
+//Botón Me Gusta
+// --like
+buttonLike.addEventListener("click", likeActive);
+// solo funciona para la primera tarjeta
+
 // El evento especial submit envía el formulario al servidor
 //  (aún no lo has estudiado, pero no te preocupes).
 //   Mira cuidadosamente el ejemplo de código para manejar este evento,

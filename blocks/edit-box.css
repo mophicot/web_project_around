@@ -8,7 +8,6 @@
   width: 100vw;
 
   background: rgb(0 0 0 / 50%);
-  /* opacity: 50%; */
   position: fixed;
   top: 0;
   left: 0;
@@ -20,8 +19,6 @@
   align-items: center;
 }
 
-.popup_opened {
-  /* display: flex; */
-
-  display: none;
+.popup.active {
+  display: flex;
 }

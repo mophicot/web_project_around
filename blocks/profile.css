@@ -14,15 +14,9 @@
   padding-top: 3.1%;
   padding-bottom: 3.9%;
 
-  /* display: flexbox;
-  flex-direction: row;
-  justify-content: space-between; */
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  /* border: 1px solid cyan; */
 }
 
 .profile-id {
@@ -30,43 +24,34 @@
   padding: 0;
   box-sizing: border-box;
   width: calc((565% / 880) * 100);
-  /*max-width: 880px; */
-  /* height: auto;
-  width: auto; */
-  /* padding-top: 40px;
-  padding-bottom: 50px; */
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  /* border: 1px solid yellow; */
 }
 
 .profile-id__avatar-frame {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* width: calc((120% / 565) * 100); */
   height: 100%;
   aspect-ratio: 1;
-
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
-
-  /* border: 1px solid red; */
 }
 
 .profile-id__avatar {
   object-fit: cover;
   width: 100%;
-  /* aspect-ratio: 1; */
-  /* width: 120px; */
 }
 
 .profile-id__add-button {
-  width: calc((150% / 880) * 100);
+  background: url(./../images/AddButton.png);
+  object-fit: scale-down;
+  aspect-ratio: 3;
+  background-color: #000;
+  border: none;
+  width: calc((151% / 880) * 100);
+  max-width: 150px;
 }
 
 .profile-id__add-button:hover {
@@ -81,12 +66,9 @@
   padding: 0;
   margin: 0;
   width: calc((415% / 565) * 100);
-
-  /* border: 1px solid white; */
 }
 
 .explorer-info__item {
-  /* justify-content: space-between; */
   margin: 0;
 }
 
@@ -101,21 +83,83 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  /* letter-spacing: 0; */
-  /* border: 1px solid lime; */
 }
 
 .explorer-info__job {
   margin: 0;
-
-  /* border: 1px solid fuchsia; */
 }
 
 .explorer-info__edit {
-  /* nada al parecer */
+  background-image: url(./../images/EditButton.png);
+  height: 24px;
+  aspect-ratio: 1;
+  background-color: black;
+  border: none;
 }
 
 .explorer-info__edit:hover {
   opacity: 60%;
+}
+
+/* ++++++++++  SMALL  max-width: 800px +++++++++ */
+
+@media screen and (max-width: 800px) {
+  .profile {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .profile-scorecard {
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    aspect-ratio: 1.193;
+
+    padding-left: calc((19% / 320) * 100);
+    padding-right: calc((19% / 320) * 100);
+
+    padding-top: calc((42% / 364) * 100);
+    padding-bottom: calc((36% / 364) * 100);
+  }
+
+  .profile-id {
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .profile-id__avatar-frame {
+    margin-bottom: 11.5%;
+  }
+
+  .explorer-info {
+    width: 100%;
+  }
+
+  .explorer-info__name-complete {
+    font-size: 22px;
+    justify-content: space-around;
+  }
+
+  .explorer-info__job {
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 13.5%;
+  }
+
+  .profile-id__add-button {
+    width: 101%;
+    aspect-ratio: 5.64;
+    background-image: url(./../images/AddButtonSmall.png);
+    max-width: 282px;
+  }
+
+  .explorer-info__edit {
+    height: 18px;
+  }
 }

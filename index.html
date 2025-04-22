@@ -44,11 +44,8 @@
               <ul class="explorer-info">
                 <li class="explorer-info__item">
                   <h1 class="explorer-info__name-complete">
-                    Jacques Cousteau<img
-                      src="./images/EditButton.png"
-                      alt="Botón para editar el nombre y ocupación"
-                      class="explorer-info__edit"
-                    />
+                    Jacques Cousteau
+                    <button class="explorer-info__edit"></button>
                   </h1>
                 </li>
                 <li class="explorer-info__item">
@@ -56,11 +53,7 @@
                 </li>
               </ul>
             </div>
-            <img
-              src="./images/AddButton.png"
-              alt="Imagen de un signo de suma"
-              class="profile-id__add-button"
-            />
+            <button class="profile-id__add-button"></button>
           </div>
         </section>
         <!-- PLACES -->
@@ -80,8 +73,6 @@
                 <div class="element__like-button"></div>
               </div>
             </div>
-            <!-- ++++++++++++++++++++++++++++++++++++ FIN - YOSEMITE -->
-
             <!-- ++++++++++++++++++++++++++++++++++++ Lago Louise -->
             <div class="element">
               <div class="element__photo-frame">
@@ -93,13 +84,9 @@
               </div>
               <div class="element__footer">
                 <h2 class="element__title">Lago Louise</h2>
-                <div
-                  class="element__like-button element__like-button_active"
-                ></div>
+                <div class="element__like-button"></div>
               </div>
             </div>
-            <!-- ++++++++++++++++++++++++++++++++++++ FIN - Lago Louise -->
-
             <!-- ++++++++++++++++++++++++++++++++++++ Montañas Calvas -->
             <div class="element">
               <div class="element__photo-frame">
@@ -114,8 +101,6 @@
                 <div class="element__like-button"></div>
               </div>
             </div>
-            <!-- ++++++++++++++++++++++++++++++++++++ FIN - Montañas Calvas -->
-
             <!-- ++++++++++++++++++++++++++++++++++++ Latemar -->
             <div class="element">
               <div class="element__photo-frame">
@@ -130,8 +115,6 @@
                 <div class="element__like-button"></div>
               </div>
             </div>
-            <!-- ++++++++++++++++++++++++++++++++++++ FIN - Latemar -->
-
             <!-- ++++++++++++++++++++++++++++++++++++ Vanois National... -->
             <div class="element">
               <div class="element__photo-frame">
@@ -146,8 +129,6 @@
                 <div class="element__like-button"></div>
               </div>
             </div>
-            <!-- ++++++++++++++++++++++++++++++++++++ FIN - Vanois National... -->
-
             <!-- ++++++++++++++++++++++++++++++++++++ Lago di Braies... -->
             <div class="element">
               <div class="element__photo-frame">
@@ -162,19 +143,17 @@
                 <div class="element__like-button"></div>
               </div>
             </div>
-            <!-- ++++++++++++++++++++++++++++++++++++ FIN - Lago di Braies... -->
           </div>
         </section>
         <!-- +++++++++++++++++++++++++++++++POPUP -->
         <section class="edit-box">
-          <div class="popup popup_opened">
-            <!-- <div class="popup__container"> -->
+          <div class="popup">
             <form class="form">
               <h2 class="form__title">Editar perfil</h2>
               <fieldset class="form__fieldset">
                 <input
                   type="text"
-                  class="form__input"
+                  class="form__input form__name"
                   id="name"
                   name="name"
                   placeholder="Nombre"
@@ -183,7 +162,7 @@
 
                 <input
                   type="text"
-                  class="form__input"
+                  class="form__input form__job"
                   id="about"
                   name="about"
                   placeholder="Acerca de mí"
@@ -194,7 +173,6 @@
               </fieldset>
               <button type="button" class="form__close-button"></button>
             </form>
-            <!-- </div> -->
           </div>
         </section>
       </main>
@@ -205,5 +183,7 @@
         </div>
       </footer>
     </div>
+    <!-- CONEXION CON JAVA SCRIPT -->
+    <script src="./scripts/script.js"></script>
   </body>
 </html>

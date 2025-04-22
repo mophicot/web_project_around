@@ -9,8 +9,6 @@
   color: #ffffff;
 
   background-color: #000000;
-
-  /* por heredar */
   display: flex;
   flex-direction: column;
 
@@ -23,5 +21,3 @@
   /* maximizar la legibilidad del texto.  */
   text-rendering: optimizeLegibility;
 }
-
-/* 320 -> 1280 */
