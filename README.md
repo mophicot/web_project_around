@@ -14,7 +14,7 @@
    Se estableció un punto de corte en 801 px de ancho.
    Se hizo uso de object-fit para las imagenes.
 
-4. Enlace a GitHub Pages.
+4. Enlace a GitHub Pages
 
    URL:
    https://mophicot.github.io/web_project_around/
