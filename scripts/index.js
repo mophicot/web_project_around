@@ -35,6 +35,8 @@ function handleSubmit(event) {
   const job = jobInput.value;
   explorerName.textContent = name;
   explorerJob.textContent = job;
+  //cerrar el Popup
+  closePopup();
 }
 
 //Botón Me Gusta
