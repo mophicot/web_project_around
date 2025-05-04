@@ -38,6 +38,9 @@
 
   height: calc((282% / 361) * 100);
   width: 100%;
+
+  /* TEST */
+  position: relative;
 }
 
 .element__photo {
@@ -46,6 +49,28 @@
   width: 100%;
   aspect-ratio: 1;
 }
+
+/* AÑADIENDO EL ICONO DE BASURA ++++++++++++++++++++++++++++++++++++++++*/
+
+.element__trash-image {
+  margin: 0;
+  object-fit: cover;
+  width: 19px;
+  aspect-ratio: 1;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  border: none;
+  z-index: 1;
+
+  /* border: 1px solid red; */
+  /* background-color: black; */
+}
+
+.element__trash-image:hover {
+  opacity: 60%;
+}
+/* AÑADIENDO EL ICONO DE BASURA +++++++++++++++++++++++++++++FIN++++++++*/
 
 .element__footer {
   margin: 0;

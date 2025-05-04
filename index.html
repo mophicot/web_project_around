@@ -43,17 +43,32 @@
               </div>
               <ul class="explorer-info">
                 <li class="explorer-info__item">
-                  <h1 class="explorer-info__name-complete">
-                    Jacques Cousteau
-                    <button class="explorer-info__edit"></button>
-                  </h1>
+                  <!-- nvo contenedor ++++++++++++++++++++++++++++-->
+                  <div class="explorer-info__tag">
+                    <h1 class="explorer-info__name-complete">
+                      Jacques Cousteau
+                      <!-- <button class="explorer-info__edit"></button> -->
+                    </h1>
+                    <!-- <button class="explorer-info__edit"></button> -->
+                    <img
+                      src="./images/EditButton.png"
+                      alt="Icono para editar nombre y ocupación"
+                      class="explorer-info__edit"
+                    />
+                  </div>
+                  <!-- nvo contenedor +++++++++++++++++++++++  FIN    -->
                 </li>
                 <li class="explorer-info__item">
                   <p class="explorer-info__job">Explorador</p>
                 </li>
               </ul>
             </div>
-            <button class="profile-id__add-button"></button>
+            <!-- <button class="profile-id__add-button"></button> -->
+            <img
+              src="./images/AddButton.png"
+              alt="Icono para añadir tarjeta"
+              class="profile-id__add-button"
+            />
           </div>
         </section>
         <!-- PLACES -->
@@ -67,6 +82,16 @@
                   alt="Imagen de Yosemite"
                   class="element__photo"
                 />
+                <!-- AÑADIR BOTÓN+++++++++++++++++++++++++++++++++++++++++++ -->
+                <!-- <div type="button" class="element__trash-icon"></div> -->
+                <!-- <div class="element__trash-icon"> -->
+                <img
+                  src="./images/Trash.svg"
+                  alt="Icono de la papelera"
+                  class="element__trash-image"
+                />
+                <!-- </div> -->
+                <!-- AÑADIR BOTÓN+++++++++++++++++++++++++++++++++++++++++++ -->
               </div>
               <div class="element__footer">
                 <h2 class="element__title">Valle de Yosemite</h2>
@@ -80,6 +105,11 @@
                   src="./images/LagoLouise.png"
                   alt="Imagen de Lago Louise"
                   class="element__photo"
+                />
+                <img
+                  src="./images/Trash.svg"
+                  alt="Icono de la papelera"
+                  class="element__trash-image"
                 />
               </div>
               <div class="element__footer">
@@ -95,6 +125,11 @@
                   alt="Imagen de Montañas Calvas"
                   class="element__photo"
                 />
+                <img
+                  src="./images/Trash.svg"
+                  alt="Icono de la papelera"
+                  class="element__trash-image"
+                />
               </div>
               <div class="element__footer">
                 <h2 class="element__title">Montañas Calvas</h2>
@@ -108,6 +143,11 @@
                   src="./images/Latemar.png"
                   alt="Imagen de Latemar"
                   class="element__photo"
+                />
+                <img
+                  src="./images/Trash.svg"
+                  alt="Icono de la papelera"
+                  class="element__trash-image"
                 />
               </div>
               <div class="element__footer">
@@ -123,6 +163,11 @@
                   alt="Imagen de Vanois National"
                   class="element__photo"
                 />
+                <img
+                  src="./images/Trash.svg"
+                  alt="Icono de la papelera"
+                  class="element__trash-image"
+                />
               </div>
               <div class="element__footer">
                 <h2 class="element__title">Vanois National Park</h2>
@@ -137,6 +182,11 @@
                   alt="Imagen de Lago di Braies"
                   class="element__photo"
                 />
+                <img
+                  src="./images/Trash.svg"
+                  alt="Icono de la papelera"
+                  class="element__trash-image"
+                />
               </div>
               <div class="element__footer">
                 <h2 class="element__title">Lago di Braies</h2>
@@ -146,7 +196,7 @@
           </div>
         </section>
         <!-- +++++++++++++++++++++++++++++++POPUP -->
-        <section class="edit-box">
+        <section class="box">
           <div class="popup">
             <form class="form">
               <h2 class="form__title">Editar perfil</h2>
@@ -171,7 +221,12 @@
 
                 <button type="submit" class="form__button">Guardar</button>
               </fieldset>
-              <button type="button" class="form__close-button"></button>
+              <!-- <button type="button" class="form__close-button"></button> -->
+              <img
+                src="./images/CloseIcon.png"
+                alt="Icono para cerrar popup"
+                class="form__close-button"
+              />
             </form>
           </div>
         </section>

@@ -52,8 +52,9 @@
   opacity: 80%;
 }
 
+/* MODIFICAR ----------------------------------------------- */
 .form__close-button {
-  background-image: url(./../images/CloseIcon.png);
+  /* background-image: url(./../images/CloseIcon.png); */
   aspect-ratio: 1;
   width: 32px;
   background-color: black;
@@ -67,6 +68,8 @@
 .form__close-button:hover {
   opacity: 60%;
 }
+
+/* MODIFICAR ----------------------------------------------- FIN*/
 
 /* ++++++++++  SMALL  max-width: 800px +++++++++ */
 
