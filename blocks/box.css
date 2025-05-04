@@ -14,6 +14,7 @@
   z-index: 1;
 
   display: none;
+  /* display: flex; */
 
   justify-content: center;
   align-items: center;
@@ -22,3 +23,86 @@
 .popup.active {
   display: flex;
 }
+
+/* NEW POPUP FOR NEW PLACE++++++++++++++++++++++++++++++++++++++++++++++ */
+.new-place-popup {
+  height: 100vh;
+  width: 100vw;
+
+  background: rgb(0 0 0 / 50%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  display: none;
+  /* display: flex; */
+
+  justify-content: center;
+  align-items: center;
+}
+
+.new-place-popup.active {
+  display: flex;
+}
+
+/* NEW POPUP FOR NEW PLACE++++++++++++++++++++++++++++++++++++++++++++FIN */
+
+/* NEW POPUP FOR IMAGE++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.image-popup {
+  height: 100vh;
+  width: 100vw;
+
+  background: rgb(0 0 0 / 50%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  /* display: none; */
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-popup.active {
+  display: flex;
+}
+
+.image-popup__container {
+  position: relative;
+  max-width: 75vw;
+  border: 1px solid yellow;
+}
+
+.image-popup__photo {
+  max-height: 75vh;
+  width: 100%;
+  object-fit: contain;
+}
+
+.image-popup__title {
+  margin: 0;
+  font-size: 12px;
+  align-self: flex-start;
+}
+
+.image-popup__close-button {
+  /* background-image: url(./../images/CloseIcon.png); */
+  aspect-ratio: 1;
+  width: 32px;
+  background-color: black;
+  position: absolute;
+  object-fit: cover;
+  top: -40px;
+  right: -40px;
+  border: none;
+}
+
+.image-popup__close-button:hover {
+  opacity: 60%;
+}
+/* NEW POPUP FOR IMAGE++++++++++++++++++++++++++++++++++++++++++++++ FIN*/
