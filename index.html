@@ -47,14 +47,16 @@
                   <div class="explorer-info__tag">
                     <h1 class="explorer-info__name-complete">
                       Jacques Cousteau
-                      <!-- <button class="explorer-info__edit"></button> -->
                     </h1>
-                    <!-- <button class="explorer-info__edit"></button> -->
-                    <img
-                      src="./images/EditButton.png"
-                      alt="Icono para editar nombre y ocupación"
-                      class="explorer-info__edit"
-                    />
+                    <!-- NUEVO BOTON (FINAL) -->
+                    <button type="button" class="explorer-info__edit">
+                      <img
+                        src="./images/EditButton.png"
+                        alt="Icono para editar nombre y ocupación"
+                        class="explorer-info__edit-image"
+                        type="button"
+                      />
+                    </button>
                   </div>
                   <!-- nvo contenedor +++++++++++++++++++++++  FIN    -->
                 </li>
@@ -63,136 +65,44 @@
                 </li>
               </ul>
             </div>
-            <!-- <button class="profile-id__add-button"></button> -->
-            <img
-              src="./images/AddButton.png"
-              alt="Icono para añadir tarjeta"
-              class="profile-id__add-button"
-            />
+            <!-- NUEVO BOTON (FINAL) 2 -->
+            <button class="profile-id__add-button">
+              <img
+                src="./images/AddButton.png"
+                alt="Icono para añadir tarjeta"
+                class="profile-id__add-button-image"
+              />
+            </button>
           </div>
         </section>
         <!-- PLACES -->
         <section class="places" id="places">
           <div class="elements">
-            <!-- ++++++++++++++++++++++++++++++++++++ YOSEMITE -->
-            <div class="element">
-              <div class="element__photo-frame">
-                <img
-                  src="./images/ValleDeYosemite.jpg"
-                  alt="Imagen de Yosemite"
-                  class="element__photo"
-                />
-                <!-- AÑADIR BOTÓN+++++++++++++++++++++++++++++++++++++++++++ -->
-                <!-- <div type="button" class="element__trash-icon"></div> -->
-                <!-- <div class="element__trash-icon"> -->
-                <img
-                  src="./images/Trash.svg"
-                  alt="Icono de la papelera"
-                  class="element__trash-image"
-                />
-                <!-- </div> -->
-                <!-- AÑADIR BOTÓN+++++++++++++++++++++++++++++++++++++++++++ -->
+            <!-- TEMPLATE+++++++++++++++++++++++++ -->
+            <template id="card" class=".card_template">
+              <!-- ++++++++++++++++++++++++++++++++++++ LUGAR -->
+              <div class="element">
+                <div class="element__photo-frame">
+                  <img src="" alt="" class="element__photo" />
+                  <!-- TRASH BOTÓN+++++++++++++++++++++++++++++++++++++++++++ -->
+
+                  <button type="button" class="element__trash-button">
+                    <img
+                      src="./images/Trash.svg"
+                      alt="Icono de la papelera"
+                      class="element__trash-image"
+                    />
+                  </button>
+                </div>
+                <div class="element__footer">
+                  <h2 class="element__title"></h2>
+                  <!-- BOTON ME GUSTA -->
+
+                  <button type="button" class="element__like-button"></button>
+                </div>
               </div>
-              <div class="element__footer">
-                <h2 class="element__title">Valle de Yosemite</h2>
-                <div class="element__like-button"></div>
-              </div>
-            </div>
-            <!-- ++++++++++++++++++++++++++++++++++++ Lago Louise -->
-            <div class="element">
-              <div class="element__photo-frame">
-                <img
-                  src="./images/LagoLouise.png"
-                  alt="Imagen de Lago Louise"
-                  class="element__photo"
-                />
-                <img
-                  src="./images/Trash.svg"
-                  alt="Icono de la papelera"
-                  class="element__trash-image"
-                />
-              </div>
-              <div class="element__footer">
-                <h2 class="element__title">Lago Louise</h2>
-                <div class="element__like-button"></div>
-              </div>
-            </div>
-            <!-- ++++++++++++++++++++++++++++++++++++ Montañas Calvas -->
-            <div class="element">
-              <div class="element__photo-frame">
-                <img
-                  src="./images/MontañasCalvas.png"
-                  alt="Imagen de Montañas Calvas"
-                  class="element__photo"
-                />
-                <img
-                  src="./images/Trash.svg"
-                  alt="Icono de la papelera"
-                  class="element__trash-image"
-                />
-              </div>
-              <div class="element__footer">
-                <h2 class="element__title">Montañas Calvas</h2>
-                <div class="element__like-button"></div>
-              </div>
-            </div>
-            <!-- ++++++++++++++++++++++++++++++++++++ Latemar -->
-            <div class="element">
-              <div class="element__photo-frame">
-                <img
-                  src="./images/Latemar.png"
-                  alt="Imagen de Latemar"
-                  class="element__photo"
-                />
-                <img
-                  src="./images/Trash.svg"
-                  alt="Icono de la papelera"
-                  class="element__trash-image"
-                />
-              </div>
-              <div class="element__footer">
-                <h2 class="element__title">Latemar</h2>
-                <div class="element__like-button"></div>
-              </div>
-            </div>
-            <!-- ++++++++++++++++++++++++++++++++++++ Vanois National... -->
-            <div class="element">
-              <div class="element__photo-frame">
-                <img
-                  src="./images/VanoisNational.png"
-                  alt="Imagen de Vanois National"
-                  class="element__photo"
-                />
-                <img
-                  src="./images/Trash.svg"
-                  alt="Icono de la papelera"
-                  class="element__trash-image"
-                />
-              </div>
-              <div class="element__footer">
-                <h2 class="element__title">Vanois National Park</h2>
-                <div class="element__like-button"></div>
-              </div>
-            </div>
-            <!-- ++++++++++++++++++++++++++++++++++++ Lago di Braies... -->
-            <div class="element">
-              <div class="element__photo-frame">
-                <img
-                  src="./images/LagoDiBraies.png"
-                  alt="Imagen de Lago di Braies"
-                  class="element__photo"
-                />
-                <img
-                  src="./images/Trash.svg"
-                  alt="Icono de la papelera"
-                  class="element__trash-image"
-                />
-              </div>
-              <div class="element__footer">
-                <h2 class="element__title">Lago di Braies</h2>
-                <div class="element__like-button"></div>
-              </div>
-            </div>
+            </template>
+            <!-- FIN DEL TEMPLATE++++++++++++++++++++++++++++ -->
           </div>
         </section>
         <!-- +++++++++++++++++++++++++++++++POPUP -->
@@ -231,7 +141,7 @@
           </div>
           <!-- NEW FORM+++++++++++++++++++++++++++++++++++++++ -->
           <div class="new-place-popup">
-            <form class="form">
+            <form class="form" id="form-new-card">
               <h2 class="form__title">Nuevo Lugar</h2>
               <fieldset class="form__fieldset">
                 <input
@@ -258,19 +168,15 @@
               <img
                 src="./images/CloseIcon.png"
                 alt="Icono para cerrar popup"
-                class="form__close-button"
+                class="form__add-card-close-button"
               />
             </form>
           </div>
           <!-- IMAGE popup+++++++++++++++++++++++++++++++++++++++ -->
           <div class="image-popup">
             <div class="image-popup__container">
-              <img
-                src="./images/ValleDeYosemite.jpg"
-                alt="Imagen de prueba"
-                class="image-popup__photo"
-              />
-              <p class="image-popup__title">Valle de Yosemite</p>
+              <img src="" alt="" class="image-popup__photo" />
+              <p class="image-popup__title"></p>
               <img
                 src="./images/CloseIcon.png"
                 alt="Icono para cerrar popup"

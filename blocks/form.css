@@ -53,7 +53,8 @@
 }
 
 /* MODIFICAR ----------------------------------------------- */
-.form__close-button {
+.form__close-button,
+.form__add-card-close-button {
   /* background-image: url(./../images/CloseIcon.png); */
   aspect-ratio: 1;
   width: 32px;
@@ -65,15 +66,16 @@
   border: none;
 }
 
-.form__close-button:hover {
+.form__close-button:hover,
+.form__add-card-close-button:hover {
   opacity: 60%;
 }
 
 /* MODIFICAR ----------------------------------------------- FIN*/
 
 /* ++++++++++  SMALL  max-width: 800px +++++++++ */
-
-@media screen and (max-width: 800px) {
+/* @media screen and (max-width: 800px) { */
+@media screen and (max-width: 700px) {
   .form {
     padding: 25px 22px;
 
@@ -96,7 +98,8 @@
     margin-top: 7%;
   }
 
-  .form__close-button {
+  .form__close-button,
+  .form__add-card-close-button {
     top: -37px;
     right: 5px;
     width: 26px;

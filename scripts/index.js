@@ -1,4 +1,4 @@
-// 1.- SELECCION EN EL DOM +++++++++++++++++++++++++
+// 1.- SELECCION EN EL DOM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Popup
 const buttonEdit = document.querySelector(".explorer-info__edit");
 const buttonClose = document.querySelector(".form__close-button");
@@ -11,10 +11,57 @@ const jobInput = document.querySelector(".form__job");
 const explorerName = document.querySelector(".explorer-info__name-complete");
 const explorerJob = document.querySelector(".explorer-info__job");
 
-//Botón Me Gusta
-const buttonLike = document.querySelector(".element__like-button");
+// NUEVA CARTA
+//Popup form para nueva card ++++++++++++++++++++++++++++++++++++++++++++++
+const buttonAddCard = document.querySelector(".profile-id__add-button");
+const buttonCloseAddCard = document.querySelector(
+  ".form__add-card-close-button"
+);
+const popupAddCard = document.querySelector(".new-place-popup");
 
-//2.- FUNCIONALIDAD +++++++++++++++++++++++++++++++
+//cambiar imagen y titulo con URL++++++++++++++++++++++++++++++
+//SE MANDA A LLAMAR POR ID, NO POR CLASE PARA REUTILIZAR EL CÓDIGO
+const imageTitleInput = document.querySelector("#new-place");
+const imageUrlInput = document.querySelector("#url");
+const formCard = document.querySelector("#form-new-card");
+
+//Template
+const gallery = document.querySelector(".elements");
+const galleryCard = document.querySelector("#card"); // llamada con ID
+
+// LIKE BUTTON
+//Botón Me Gusta
+// const buttonLike = document.querySelector(".element__like-button");
+
+//Arreglo de tarjetas
+const initialCards = [
+  {
+    name: "Valle de Yosemite",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
+  },
+  {
+    name: "Lago Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
+  },
+  {
+    name: "Montañas Calvas",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
+  },
+  {
+    name: "Parque Nacional de la Vanoise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
+  },
+];
+
+//2.- FUNCIONALIDAD~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Popup
 // --abrir
 function openPopup() {
@@ -39,61 +86,151 @@ function handleSubmit(event) {
   closePopup();
 }
 
-//Botón Me Gusta
-// --like
-function likeActive() {
-  buttonLike.classList.add("active");
+//Función de clonación de tarjeta++++++++++++++++++++++++++++++++++++++++++++++++
+function cloneCard(name, link) {
+  //los nombres deben coincidir con el arreglo objetivo
+  const cardContentClone = galleryCard.content.cloneNode(true);
+  //nombrando al contenido de la carta clonada (.element__title) como
+  //...clonedCardTitle para trabajar con ella
+  const clonedCardTitle = cardContentClone.querySelector(".element__title");
+  clonedCardTitle.textContent = name;
+  //lo mismo para link y alt
+  const clonedCardUrl = cardContentClone.querySelector(".element__photo"); //clonedCardUrl es un objeto
+  clonedCardUrl.alt = name;
+  clonedCardUrl.src = link;
+  //botones -- se declaran las funciones DENTRO de la clonación para que ya
+  // ...se clonen con las funciones
+  const cardTrash = cardContentClone.querySelector(".element__trash-image");
+  const cardLike = cardContentClone.querySelector(".element__like-button");
+
+  //boton de basura
+  cardTrash.addEventListener("click", (evt) => {
+    //requiere un evento porque busca el más cercano a lo que le das click
+    const removeTrash = evt.target.closest(".element"); //target.closest es palabra reservada
+    removeTrash.remove(); //remove tambien es palabra reservada
+  });
+
+  //boton like
+  cardLike.addEventListener("click", () => {
+    // no requiere evento porque se aplica directamente
+    // ... al boton deonde se hace click
+    cardLike.classList.toggle("element__like-button-active");
+  });
+
+  //ATRIBUTOS PARA LA NUEVA ARJETA DESDE FORM
+  clonedCardUrl.addEventListener("click", () => {
+    openPopupImage(clonedCardUrl.src, clonedCardUrl.alt);
+  });
+
+  gallery.prepend(cardContentClone); //al inicio mete la carta clonada
+} //Función de clonación de tarjeta+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// Popup para añadir tarjeta+++++++++++++++++++++++++++++++++++++++++++++++
+// --abrir
+function openPopupAddCard() {
+  popupAddCard.classList.add("active");
+}
+// --cerrar
+function closePopupAddCard() {
+  popupAddCard.classList.remove("active");
 }
 
-//3.- AÑADIR EVENTOS +++++++++++++++++++++++++++++++
+//aGREGAR IMAGEN Y Cambiar nombre
+//--recolección, asignación y actualización
+function handleSubmitImage(event) {
+  //evitar que se ejecute el submit
+  event.preventDefault();
+  //guardar datos en value
+  const imageTitle = imageTitleInput.value;
+  const imageUrl = imageUrlInput.value;
+
+  //Clonado de la nueva tarjeta
+  cloneCard(imageTitle, imageUrl);
+
+  //cerrar el Popup
+  closePopupAddCard();
+}
+
+// Popup para expandir imagen+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// --abrir
+function openPopupImage(urlImage, titleImage) {
+  PopupExpandedImage.src = urlImage;
+  PopupExpandedImageTitle.textContent = titleImage;
+  imagePopup.classList.add("active");
+}
+
+// --cerrar
+function closePopupImage() {
+  imagePopup.classList.remove("active");
+}
+
+//Botón Me Gusta
+// --like
+// function likeActive() {
+//   buttonLike.classList.add("active");
+// }
+
+//genera las tarjetas
+initialCards.forEach((item) => {
+  cloneCard(item.name, item.link);
+});
+
+// declaración de constantes para IMAGEN EXPANDIDA
+//Popup imagen emergente+++++++++++++++++++++++++++++++++++++++++++++++++++++
+const imageOpenPopup = document.querySelector(".element__photo"); //abre el popup
+const imageClosePopup = document.querySelector(".image-popup__close-button");
+const imagePopup = document.querySelector(".image-popup");
+const PopupExpandedImage = document.querySelector(".image-popup__photo");
+const PopupExpandedImageTitle = document.querySelector(".image-popup__title");
+
+//3.- AÑADIR EVENTOS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // Popup
 // --abrir
 buttonEdit.addEventListener("click", openPopup);
 // --cerrar
 buttonClose.addEventListener("click", closePopup);
-
 //Cambiar nombre
 form.addEventListener("submit", handleSubmit);
 
+// Popup Add Card++++++++++++++++++++++++++++++++++++++++NEW
+// --abrir
+buttonAddCard.addEventListener("click", openPopupAddCard);
+// --cerrar
+buttonCloseAddCard.addEventListener("click", closePopupAddCard);
+// Popup Add Card++++++++++++++++++++++++++++++++++++++++fin
+
+//Añadir una nueva tarjeta
+
+formCard.addEventListener("submit", handleSubmitImage);
+
+// Popup Imagen Emergente++++++++++++++++++++++++++++++++++++++++NEW
+// --abrir
+// imageOpenPopup.addEventListener("click", openPopupImage);
+// --cerrar
+imageClosePopup.addEventListener("click", closePopupImage);
+// Popup Add Card++++++++++++++++++++++++++++++++++++++++fin
+
+// EVENTO el Popup de la imagen
+// clonedCardUrl.addEventListener("click", () => {
+//   openPopupImage(clonedCardUrl.src, clonedCardUrl.alt);
+// });
+
 //Botón Me Gusta
 // --like
-buttonLike.addEventListener("click", likeActive);
+// buttonLike.addEventListener("click", likeActive);
 // solo funciona para la primera tarjeta
 
-// El evento especial submit envía el formulario al servidor
-//  (aún no lo has estudiado, pero no te preocupes).
-//   Mira cuidadosamente el ejemplo de código para manejar este evento,
-//   y trata de comprender lo que está pasando.
-//   Hemos añadido algunos comentarios en el código para ayudarte:
+//++++++++++++++++++++++++++++++++++++++++++CARDS++++++++++++++++++++++
 
-// Busquemos el formulario en el DOM
-// let formElement = // Utiliza el método querySelector()
+// const gallery = document.querySelector(".elements");
+// const galleryTemplate = document.querySelector(".card_template");
 
-// Lo siguiente es el manipulador (handler) de entrega de formularios, aunque
-// no se enviará en ningún sitio todavía
-
-// Observa que el nombre de la función comienza con un verbo
-// y describe exactamente lo que hace la función
-// function handleProfileFormSubmit(evt) {
-// Esta línea impide que el navegador
-// entregue el formulario en su forma predeterminada.
-// evt.preventDefault();
-// Una vez hecho esto, podemos definir nuestra propia forma de entregar el formulario.
-// Lo explicaremos todo con más detalle después.
-
-// Busquemos los campos del formulario en el DOM
-// let nameInput = // Utiliza el método querySelector()
-// let jobInput = // Utiliza el método querySelector()
-
-// Obtén los valores de cada campo desde la propiedad de valor correspondiente
-
-// Selecciona los elementos donde se introducirán los valores de los campos
-
-// Inserta nuevos valores utilizando el textContent
-// propiedad del método querySelector()
+/* Aquí se aplica el array */
+// function addCards() {
+//   initialCards.forEach((item) => {
+//     const card = createCard(item.name, item.link);
+//     gallery.append(card);
+//     openPopupAdd.classList.remove("popup__add_opened");
+//   });
 // }
-
-// Conecta el manipulador (handler) al formulario:
-// se observará el evento de entrega
-// formElement.addEventListener('submit', handleProfileFormSubmit);
