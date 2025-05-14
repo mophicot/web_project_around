@@ -39,7 +39,6 @@
   height: calc((282% / 361) * 100);
   width: 100%;
 
-  /* TEST */
   position: relative;
 }
 
@@ -54,7 +53,6 @@
 .element__trash-button {
   margin: 0;
   padding: 0;
-  /* object-fit: cover; */
   width: 19px;
   aspect-ratio: 1;
   position: absolute;
@@ -63,26 +61,11 @@
   border: none;
   z-index: 1;
   background: none;
-
-  /* border: 1px solid red; */
-  /* background-color: black; */
 }
 
 .element__trash-image {
   margin: 0;
-  /* object-fit: fill; */
-  /* background: none; */
   width: 100%;
-  /* border: 1px solid black; */
-  /* aspect-ratio: 1; */
-  /* position: absolute;
-  top: 18px;
-  right: 15px;
-  border: none;
-  z-index: 1; */
-
-  /* border: 1px solid red; */
-  /* background-color: black; */
 }
 
 .element__trash-image:hover {
@@ -135,8 +118,6 @@
 
 .element__like-button-active {
   background-image: url("./../images/meGustaActive.png");
-  /* background-image: linear-gradient(000); */
-  /* background-color: red; */
 }
 
 /* ++++++++++  SMALL  max-width: 800px +++++++++ */

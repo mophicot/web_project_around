@@ -75,7 +75,6 @@
 .image-popup__container {
   position: relative;
   max-width: 75vw;
-  /* border: 1px solid yellow; */
 }
 
 .image-popup__photo {
@@ -91,7 +90,6 @@
 }
 
 .image-popup__close-button {
-  /* background-image: url(./../images/CloseIcon.png); */
   aspect-ratio: 1;
   width: 32px;
   background-color: black;

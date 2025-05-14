@@ -5,14 +5,15 @@
 
 2. Descripción del proyecto y su funcionalidad.
 
-   Este proyecto es el primero en incorporar JScript a la interacción con la página para mostrar distintos lugares alrededor de USA
+   Este proyecto es el segundo en contemplar JScript a la interacción con la página para mostrar distintos lugares alrededor de USA
 
 3. Descripción de las tecnologías y técnicas utilizadas.
 
-   Para lograr el objetivo se utilizaron referencias porcentuales para establecer margenes, padding, así como las dimensiones de distintos elementos de la página.
-   El diseño de la página considero 2 escenarios un ancho de 1280px y 320 respectivamente.
-   Se estableció un punto de corte en 801 px de ancho.
-   Se hizo uso de object-fit para las imagenes.
+   Para este proyecto se añadió la funcionalidad de generar las trajetas de los lugares usando la función template y clonación
+
+   Con lo anterior se independizó el comprtamiento de los botones de like y trash (recién añadido) para cada una de las tarjetas
+
+   También se incorporó un popup para mostrar la imagen de la tarjeta seleccionada en mayor resolución junto con su nombre
 
 4. Enlace a GitHub Pages
 

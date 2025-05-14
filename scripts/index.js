@@ -12,14 +12,14 @@ const explorerName = document.querySelector(".explorer-info__name-complete");
 const explorerJob = document.querySelector(".explorer-info__job");
 
 // NUEVA CARTA
-//Popup form para nueva card ++++++++++++++++++++++++++++++++++++++++++++++
+//Popup form para nueva card
 const buttonAddCard = document.querySelector(".profile-id__add-button");
 const buttonCloseAddCard = document.querySelector(
   ".form__add-card-close-button"
 );
 const popupAddCard = document.querySelector(".new-place-popup");
 
-//cambiar imagen y titulo con URL++++++++++++++++++++++++++++++
+//cambiar imagen y titulo con URL
 //SE MANDA A LLAMAR POR ID, NO POR CLASE PARA REUTILIZAR EL CÓDIGO
 const imageTitleInput = document.querySelector("#new-place");
 const imageUrlInput = document.querySelector("#url");
@@ -28,10 +28,6 @@ const formCard = document.querySelector("#form-new-card");
 //Template
 const gallery = document.querySelector(".elements");
 const galleryCard = document.querySelector("#card"); // llamada con ID
-
-// LIKE BUTTON
-//Botón Me Gusta
-// const buttonLike = document.querySelector(".element__like-button");
 
 //Arreglo de tarjetas
 const initialCards = [
@@ -86,7 +82,7 @@ function handleSubmit(event) {
   closePopup();
 }
 
-//Función de clonación de tarjeta++++++++++++++++++++++++++++++++++++++++++++++++
+//Función de clonación de tarjeta
 function cloneCard(name, link) {
   //los nombres deben coincidir con el arreglo objetivo
   const cardContentClone = galleryCard.content.cloneNode(true);
@@ -123,9 +119,9 @@ function cloneCard(name, link) {
   });
 
   gallery.prepend(cardContentClone); //al inicio mete la carta clonada
-} //Función de clonación de tarjeta+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
 
-// Popup para añadir tarjeta+++++++++++++++++++++++++++++++++++++++++++++++
+// Popup para añadir tarjeta
 // --abrir
 function openPopupAddCard() {
   popupAddCard.classList.add("active");
@@ -135,7 +131,7 @@ function closePopupAddCard() {
   popupAddCard.classList.remove("active");
 }
 
-//aGREGAR IMAGEN Y Cambiar nombre
+//AGREGAR IMAGEN Y Cambiar nombre
 //--recolección, asignación y actualización
 function handleSubmitImage(event) {
   //evitar que se ejecute el submit
@@ -151,7 +147,7 @@ function handleSubmitImage(event) {
   closePopupAddCard();
 }
 
-// Popup para expandir imagen+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Popup para expandir imagen
 // --abrir
 function openPopupImage(urlImage, titleImage) {
   PopupExpandedImage.src = urlImage;
@@ -164,19 +160,13 @@ function closePopupImage() {
   imagePopup.classList.remove("active");
 }
 
-//Botón Me Gusta
-// --like
-// function likeActive() {
-//   buttonLike.classList.add("active");
-// }
-
 //genera las tarjetas
 initialCards.forEach((item) => {
   cloneCard(item.name, item.link);
 });
 
 // declaración de constantes para IMAGEN EXPANDIDA
-//Popup imagen emergente+++++++++++++++++++++++++++++++++++++++++++++++++++++
+//Popup imagen emergente
 const imageOpenPopup = document.querySelector(".element__photo"); //abre el popup
 const imageClosePopup = document.querySelector(".image-popup__close-button");
 const imagePopup = document.querySelector(".image-popup");
@@ -193,44 +183,13 @@ buttonClose.addEventListener("click", closePopup);
 //Cambiar nombre
 form.addEventListener("submit", handleSubmit);
 
-// Popup Add Card++++++++++++++++++++++++++++++++++++++++NEW
+// Popup Add Card
 // --abrir
 buttonAddCard.addEventListener("click", openPopupAddCard);
 // --cerrar
 buttonCloseAddCard.addEventListener("click", closePopupAddCard);
-// Popup Add Card++++++++++++++++++++++++++++++++++++++++fin
 
 //Añadir una nueva tarjeta
-
 formCard.addEventListener("submit", handleSubmitImage);
 
-// Popup Imagen Emergente++++++++++++++++++++++++++++++++++++++++NEW
-// --abrir
-// imageOpenPopup.addEventListener("click", openPopupImage);
-// --cerrar
 imageClosePopup.addEventListener("click", closePopupImage);
-// Popup Add Card++++++++++++++++++++++++++++++++++++++++fin
-
-// EVENTO el Popup de la imagen
-// clonedCardUrl.addEventListener("click", () => {
-//   openPopupImage(clonedCardUrl.src, clonedCardUrl.alt);
-// });
-
-//Botón Me Gusta
-// --like
-// buttonLike.addEventListener("click", likeActive);
-// solo funciona para la primera tarjeta
-
-//++++++++++++++++++++++++++++++++++++++++++CARDS++++++++++++++++++++++
-
-// const gallery = document.querySelector(".elements");
-// const galleryTemplate = document.querySelector(".card_template");
-
-/* Aquí se aplica el array */
-// function addCards() {
-//   initialCards.forEach((item) => {
-//     const card = createCard(item.name, item.link);
-//     gallery.append(card);
-//     openPopupAdd.classList.remove("popup__add_opened");
-//   });
-// }

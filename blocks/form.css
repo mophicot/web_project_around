@@ -55,7 +55,6 @@
 /* MODIFICAR ----------------------------------------------- */
 .form__close-button,
 .form__add-card-close-button {
-  /* background-image: url(./../images/CloseIcon.png); */
   aspect-ratio: 1;
   width: 32px;
   background-color: black;
@@ -74,7 +73,6 @@
 /* MODIFICAR ----------------------------------------------- FIN*/
 
 /* ++++++++++  SMALL  max-width: 800px +++++++++ */
-/* @media screen and (max-width: 800px) { */
 @media screen and (max-width: 700px) {
   .form {
     padding: 25px 22px;
