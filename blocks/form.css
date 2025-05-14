@@ -52,7 +52,6 @@
   opacity: 80%;
 }
 
-/* MODIFICAR ----------------------------------------------- */
 .form__close-button,
 .form__add-card-close-button {
   aspect-ratio: 1;
@@ -69,8 +68,6 @@
 .form__add-card-close-button:hover {
   opacity: 60%;
 }
-
-/* MODIFICAR ----------------------------------------------- FIN*/
 
 /* ++++++++++  SMALL  max-width: 800px +++++++++ */
 @media screen and (max-width: 700px) {

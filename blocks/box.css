@@ -14,7 +14,6 @@
   z-index: 1;
 
   display: none;
-  /* display: flex; */
 
   justify-content: center;
   align-items: center;
@@ -24,7 +23,6 @@
   display: flex;
 }
 
-/* NEW POPUP FOR NEW PLACE++++++++++++++++++++++++++++++++++++++++++++++ */
 .new-place-popup {
   height: 100vh;
   width: 100vw;
@@ -36,7 +34,6 @@
   z-index: 1;
 
   display: none;
-  /* display: flex; */
 
   justify-content: center;
   align-items: center;
@@ -45,10 +42,6 @@
 .new-place-popup.active {
   display: flex;
 }
-
-/* NEW POPUP FOR NEW PLACE++++++++++++++++++++++++++++++++++++++++++++FIN */
-
-/* NEW POPUP FOR IMAGE++++++++++++++++++++++++++++++++++++++++++++++ */
 
 .image-popup {
   height: 100vh;
@@ -61,7 +54,6 @@
   z-index: 1;
 
   display: none;
-  /* display: flex; */
 
   flex-direction: column;
   justify-content: center;
@@ -103,4 +95,3 @@
 .image-popup__close-button:hover {
   opacity: 60%;
 }
-/* NEW POPUP FOR IMAGE++++++++++++++++++++++++++++++++++++++++++++++ FIN*/

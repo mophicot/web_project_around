@@ -49,7 +49,6 @@
   aspect-ratio: 1;
 }
 
-/* AÑADIENDO EL ICONO DE BASURA ++++++++++++++++++++++++++++++++++++++++*/
 .element__trash-button {
   margin: 0;
   padding: 0;
@@ -71,7 +70,6 @@
 .element__trash-image:hover {
   opacity: 60%;
 }
-/* AÑADIENDO EL ICONO DE BASURA +++++++++++++++++++++++++++++FIN++++++++*/
 
 .element__footer {
   margin: 0;
