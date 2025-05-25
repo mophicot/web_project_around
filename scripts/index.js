@@ -29,10 +29,6 @@ const formCard = document.querySelector("#form-new-card");
 const gallery = document.querySelector(".elements");
 const galleryCard = document.querySelector("#card"); // llamada con ID
 
-// LIKE BUTTON
-//Botón Me Gusta
-// const buttonLike = document.querySelector(".element__like-button");
-
 //Arreglo de tarjetas
 const initialCards = [
   {
@@ -62,6 +58,7 @@ const initialCards = [
 ];
 
 //2.- FUNCIONALIDAD~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 // Popup
 // --abrir
 function openPopup() {
@@ -74,14 +71,17 @@ function closePopup() {
 
 //Cambiar nombre
 //--recolección, asignación y actualización
+
 function handleSubmit(event) {
   //evitar que se ejecute el submit
   event.preventDefault();
+
   //guardar datos en value
   const name = nameInput.value;
   const job = jobInput.value;
   explorerName.textContent = name;
   explorerJob.textContent = job;
+
   //cerrar el Popup
   closePopup();
 }
@@ -90,14 +90,17 @@ function handleSubmit(event) {
 function cloneCard(name, link) {
   //los nombres deben coincidir con el arreglo objetivo
   const cardContentClone = galleryCard.content.cloneNode(true);
+
   //nombrando al contenido de la carta clonada (.element__title) como
   //...clonedCardTitle para trabajar con ella
   const clonedCardTitle = cardContentClone.querySelector(".element__title");
   clonedCardTitle.textContent = name;
+
   //lo mismo para link y alt
   const clonedCardUrl = cardContentClone.querySelector(".element__photo"); //clonedCardUrl es un objeto
   clonedCardUrl.alt = name;
   clonedCardUrl.src = link;
+
   //botones -- se declaran las funciones DENTRO de la clonación para que ya
   // ...se clonen con las funciones
   const cardTrash = cardContentClone.querySelector(".element__trash-image");
@@ -123,7 +126,7 @@ function cloneCard(name, link) {
   });
 
   gallery.prepend(cardContentClone); //al inicio mete la carta clonada
-} //Función de clonación de tarjeta+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+} //Función de clonación de tarjeta++++++++++++++++++++++++++++++++++++++++++++++++FIN
 
 // Popup para añadir tarjeta+++++++++++++++++++++++++++++++++++++++++++++++
 // --abrir
@@ -135,10 +138,11 @@ function closePopupAddCard() {
   popupAddCard.classList.remove("active");
 }
 
-//aGREGAR IMAGEN Y Cambiar nombre
+//AGREGAR IMAGEN Y Cambiar nombre
 //--recolección, asignación y actualización
 function handleSubmitImage(event) {
   //evitar que se ejecute el submit
+
   event.preventDefault();
   //guardar datos en value
   const imageTitle = imageTitleInput.value;
@@ -164,13 +168,7 @@ function closePopupImage() {
   imagePopup.classList.remove("active");
 }
 
-//Botón Me Gusta
-// --like
-// function likeActive() {
-//   buttonLike.classList.add("active");
-// }
-
-//genera las tarjetas
+//Genera las tarjetas
 initialCards.forEach((item) => {
   cloneCard(item.name, item.link);
 });
@@ -188,28 +186,26 @@ const PopupExpandedImageTitle = document.querySelector(".image-popup__title");
 // Popup
 // --abrir
 buttonEdit.addEventListener("click", openPopup);
+
 // --cerrar
 buttonClose.addEventListener("click", closePopup);
+
 //Cambiar nombre
 form.addEventListener("submit", handleSubmit);
 
-// Popup Add Card++++++++++++++++++++++++++++++++++++++++NEW
+// Popup Add Card++++++++++++++++++++++++++++++++++++++++
 // --abrir
 buttonAddCard.addEventListener("click", openPopupAddCard);
+
 // --cerrar
 buttonCloseAddCard.addEventListener("click", closePopupAddCard);
 // Popup Add Card++++++++++++++++++++++++++++++++++++++++fin
 
 //Añadir una nueva tarjeta
-
 formCard.addEventListener("submit", handleSubmitImage);
 
-// Popup Imagen Emergente++++++++++++++++++++++++++++++++++++++++NEW
-// --abrir
-// imageOpenPopup.addEventListener("click", openPopupImage);
 // --cerrar
 imageClosePopup.addEventListener("click", closePopupImage);
-// Popup Add Card++++++++++++++++++++++++++++++++++++++++fin
 
 // EVENTO el Popup de la imagen
 // clonedCardUrl.addEventListener("click", () => {
