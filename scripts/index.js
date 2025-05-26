@@ -86,27 +86,38 @@ function handleSubmit(event) {
   closePopup();
 }
 
-//Función de clonación de tarjeta++++++++++++++++++++++++++++++++++++++++++++++++
+//FUNCIÓN DE CLONACIÓN DE TARJETA++++++++++++++++++++++++++++++++++++++++++++++++
 function cloneCard(name, link) {
   //los nombres deben coincidir con el arreglo objetivo
+  //clona todo su contenido (con true, incluye los nodos hijos).
+  //Resultado: cardContentClone es una copia lista para personalizar.
   const cardContentClone = galleryCard.content.cloneNode(true);
 
   //nombrando al contenido de la carta clonada (.element__title) como
   //...clonedCardTitle para trabajar con ella
+  //Se busca dentro del clon el elemento con clase .element__title.
+  //Se reemplaza su contenido con el texto que recibe la función como name.
   const clonedCardTitle = cardContentClone.querySelector(".element__title");
   clonedCardTitle.textContent = name;
 
   //lo mismo para link y alt
+  //Se selecciona el elemento de la imagen.
+  //Se le asigna el texto alternativo (alt) y el enlace a la imagen (src).
   const clonedCardUrl = cardContentClone.querySelector(".element__photo"); //clonedCardUrl es un objeto
   clonedCardUrl.alt = name;
   clonedCardUrl.src = link;
 
-  //botones -- se declaran las funciones DENTRO de la clonación para que ya
-  // ...se clonen con las funciones
+  //BOTONES
+  //  -- se declaran las funciones DENTRO de la clonación para que ya
+  // ...se clonen con las tarjetas
   const cardTrash = cardContentClone.querySelector(".element__trash-image");
   const cardLike = cardContentClone.querySelector(".element__like-button");
 
-  //boton de basura
+  //Boton de basura
+  // Se agrega un event listener al botón de eliminar.
+  // evt.target es el botón clicado.
+  // closest(".element") busca el contenedor de la tarjeta.
+  // remove() lo elimina del DOM.
   cardTrash.addEventListener("click", (evt) => {
     //requiere un evento porque busca el más cercano a lo que le das click
     const removeTrash = evt.target.closest(".element"); //target.closest es palabra reservada
@@ -114,6 +125,8 @@ function cloneCard(name, link) {
   });
 
   //boton like
+  // Agrega un event listener al botón de "like".
+  //Al hacer clic, activa o desactiva una clase CSS (toggle), que cambia su estilo visual
   cardLike.addEventListener("click", () => {
     // no requiere evento porque se aplica directamente
     // ... al boton deonde se hace click
@@ -125,8 +138,8 @@ function cloneCard(name, link) {
     openPopupImage(clonedCardUrl.src, clonedCardUrl.alt);
   });
 
-  gallery.prepend(cardContentClone); //al inicio mete la carta clonada
-} //Función de clonación de tarjeta++++++++++++++++++++++++++++++++++++++++++++++++FIN
+  gallery.prepend(cardContentClone); //mete la carta clonada al inicio de la galería
+} //FUNCIÓN DE CLONACIÓN DE TARJETA++++++++++++++++++++++++++++++++++++++++++++++++FIN
 
 // Popup para añadir tarjeta+++++++++++++++++++++++++++++++++++++++++++++++
 // --abrir
