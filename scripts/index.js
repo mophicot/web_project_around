@@ -1,3 +1,6 @@
+//importar enableValidation de validation.js
+import { enableValidation } from "./validate.js";
+
 // 1.- SELECCION EN EL DOM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Popup
 const buttonEdit = document.querySelector(".explorer-info__edit");
@@ -28,6 +31,11 @@ const formCard = document.querySelector("#form-new-card");
 //Template
 const gallery = document.querySelector(".elements");
 const galleryCard = document.querySelector("#card"); // llamada con ID
+
+//para cerrar Popups haciendo click fuera del form
+//chgpt asegurate formOutClose sea un contenedor suficientemente externo
+// (por ejemplo .box) que incluya a los formularios.
+const formOutClose = document.querySelector(".box");
 
 //Arreglo de tarjetas
 const initialCards = [
@@ -61,13 +69,70 @@ const initialCards = [
 
 // Popup
 // --abrir
-function openPopup() {
-  popup.classList.add("active");
+function openPopup(evt) {
+  if (evt.target.classList.contains("profile-id__add-button-image")) {
+    popupAddCard.classList.add("active");
+  } else {
+    popup.classList.add("active");
+  }
 }
 // --cerrar
+// function closePopup() {
+// popup.classList.remove("active");
+// }
+
+// function closePopup(evt) {
 function closePopup() {
+  // console.log(evt);
+  // if (evt.target.classList.contains("form__add-card-close-button")) {
+  popupAddCard.classList.remove("active");
+  // } else {
   popup.classList.remove("active");
+  imagePopup.classList.remove("active"); //IMAGEN
+  // }
 }
+
+//cerrar con click!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function closeClickPopup(evt) {
+  const isClickInsideForm = evt.target.closest(".form");
+
+  // Si NO se hizo clic dentro de un formulario
+  if (!isClickInsideForm) {
+    closePopup();
+  }
+}
+// function closeClickPopup(evt) {
+//   if (!evt.target.classList.contains("box")) {
+//     // closePopup();
+//     console.log(evt);
+//   } else {
+//     closePopup();
+//     console.log(evt);
+//   }
+// }
+
+//EVENTO
+//CERRAR Popups con click
+// closeClickPopup(evt)
+formOutClose.addEventListener("click", closeClickPopup);
+
+//cerrar con ESC----------------------------------------------------------OK
+function closeEscPopup(evt) {
+  if (evt.key === "Escape") {
+    closePopup();
+    // closePopup(evt);
+  }
+}
+// Popup para añadir tarjeta+++++++++++++++++++++++++++++++++++++++++++++++!!!
+// --abrir
+// function openPopupAddCard(evt) {
+//   console.log(evt);
+//   popupAddCard.classList.add("active");
+// }
+// --cerrar
+// function closePopupAddCard() {
+//   popupAddCard.classList.remove("active");
+// }
 
 //Cambiar nombre
 //--recolección, asignación y actualización
@@ -84,6 +149,7 @@ function handleSubmit(event) {
 
   //cerrar el Popup
   closePopup();
+  // closePopup(event);
 }
 
 //FUNCIÓN DE CLONACIÓN DE TARJETA++++++++++++++++++++++++++++++++++++++++++++++++
@@ -141,16 +207,6 @@ function cloneCard(name, link) {
   gallery.prepend(cardContentClone); //mete la carta clonada al inicio de la galería
 } //FUNCIÓN DE CLONACIÓN DE TARJETA++++++++++++++++++++++++++++++++++++++++++++++++FIN
 
-// Popup para añadir tarjeta+++++++++++++++++++++++++++++++++++++++++++++++
-// --abrir
-function openPopupAddCard() {
-  popupAddCard.classList.add("active");
-}
-// --cerrar
-function closePopupAddCard() {
-  popupAddCard.classList.remove("active");
-}
-
 //AGREGAR IMAGEN Y Cambiar nombre
 //--recolección, asignación y actualización
 function handleSubmitImage(event) {
@@ -165,7 +221,9 @@ function handleSubmitImage(event) {
   cloneCard(imageTitle, imageUrl);
 
   //cerrar el Popup
-  closePopupAddCard();
+  // closePopupAddCard();
+  closePopup();
+  // closePopup(event);
 }
 
 // Popup para expandir imagen+++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -177,9 +235,9 @@ function openPopupImage(urlImage, titleImage) {
 }
 
 // --cerrar
-function closePopupImage() {
-  imagePopup.classList.remove("active");
-}
+// function closePopupImage() {
+//   imagePopup.classList.remove("active");
+// }
 
 //Genera las tarjetas
 initialCards.forEach((item) => {
@@ -208,17 +266,23 @@ form.addEventListener("submit", handleSubmit);
 
 // Popup Add Card++++++++++++++++++++++++++++++++++++++++
 // --abrir
-buttonAddCard.addEventListener("click", openPopupAddCard);
+// buttonAddCard.addEventListener("click", openPopupAddCard);
+buttonAddCard.addEventListener("click", openPopup);
 
 // --cerrar
-buttonCloseAddCard.addEventListener("click", closePopupAddCard);
+// buttonCloseAddCard.addEventListener("click", closePopupAddCard);
+buttonCloseAddCard.addEventListener("click", closePopup);
 // Popup Add Card++++++++++++++++++++++++++++++++++++++++fin
 
 //Añadir una nueva tarjeta
 formCard.addEventListener("submit", handleSubmitImage);
 
 // --cerrar
-imageClosePopup.addEventListener("click", closePopupImage);
+// imageClosePopup.addEventListener("click", closePopupImage);
+imageClosePopup.addEventListener("click", closePopup);
+
+//cerrar con ESC
+document.addEventListener("keydown", closeEscPopup);
 
 //////////VALIDATION~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -253,116 +317,7 @@ imageClosePopup.addEventListener("click", closePopupImage);
 // console.log(evt.target.validity.valid);
 // });
 
-//Lógica de validación++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add("form__input_type_error");
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add("form__input-error_active");
-};
-
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove("form__input_type_error");
-  errorElement.classList.remove("form__input-error_active");
-  errorElement.textContent = "";
-};
-
-const checkInputValidity = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-};
-
-const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-};
-
-const toggleButtonState = (inputList, buttonElement) => {
-  //Mejora CHat GPT
-  console.log(hasInvalidInput(inputList));
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add("button_inactive");
-    //mejora CHat GPT para navegadores sin CSS
-    buttonElement.disabled = true;
-  } else {
-    buttonElement.classList.remove("button_inactive");
-    //mejora CHat GPT para navegadores sin CSS
-    buttonElement.disabled = false;
-  }
-};
-
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(".form__input"));
-  //PASO 1
-  const buttonElement = formElement.querySelector(".form__submit");
-
-  //PASO 3
-  // Llama a toggleButtonState() antes de empezar a detectar el evento de entrada
-  toggleButtonState(inputList, buttonElement);
-
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", function () {
-      checkInputValidity(formElement, inputElement);
-      //PASO 2
-      // Llama a toggleButtonState() y pásale un array de campos y el botón
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-};
-
-//FUNCION enableValidation ORIGINAL
-// const enableValidation = () => {
-//   const formList = Array.from(document.querySelectorAll(".form"));
-//   formList.forEach((formElement) => {
-//     formElement.addEventListener("submit", function (evt) {
-//       evt.preventDefault();
-//     });
-
-//FUNCION enableValidation CHGPT
-const enableValidation = (config) => {
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-
-    // CHAT GPT
-    // Esto no es necesario, porque ya puedes asignar eventos directamente
-    //  al formElement.
-    // El fieldset no contiene el botón submit,
-    // así que formElement.querySelector(".form__submit")
-    //  dentro de setEventListeners() no funcionará correctamente si
-    //  se lo pasas a setEventListeners() como fieldset.
-
-    // const fieldsetList = Array.from(
-    //   formElement.querySelectorAll(".form__fieldset")
-    // );
-
-    // fieldsetList.forEach((fieldset) => {
-    //   setEventListeners(fieldset);
-    // });
-
-    //SUgerencia de Chat GPT
-    setEventListeners(formElement);
-  });
-};
-
-// enableValidation();
-
-// enableValidation({
-//   formSelector: ".popup__form",
-//   inputSelector: ".popup__input",
-//   submitButtonSelector: ".popup__button",
-//   inactiveButtonClass: "popup__button_disabled",
-//   inputErrorClass: "popup__input_type_error",
-//   errorClass: "popup__error_visible",
-// });
-
+//NUEVA FUNCION
 enableValidation({
   formSelector: ".form",
   inputSelector: ".form__input",
