@@ -204,17 +204,7 @@ function cloneCard(name, link) {
     openPopupImage(clonedCardUrl.src, clonedCardUrl.alt);
   });
 
-  gallery.prepend(cardContentClone); //al inicio mete la carta clonada
-}
-
-// Popup para añadir tarjeta
-// --abrir
-function openPopupAddCard() {
-  popupAddCard.classList.add("active");
-}
-// --cerrar
-function closePopupAddCard() {
-  popupAddCard.classList.remove("active");
+  gallery.prepend(cardContentClone); //mete la carta clonada al inicio de la galería
 }
 
 //AGREGAR IMAGEN Y Cambiar nombre
