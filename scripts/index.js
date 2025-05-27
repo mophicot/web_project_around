@@ -76,23 +76,14 @@ function openPopup(evt) {
     popup.classList.add("active");
   }
 }
-// --cerrar
-// function closePopup() {
-// popup.classList.remove("active");
-// }
 
-// function closePopup(evt) {
 function closePopup() {
-  // console.log(evt);
-  // if (evt.target.classList.contains("form__add-card-close-button")) {
   popupAddCard.classList.remove("active");
-  // } else {
   popup.classList.remove("active");
-  imagePopup.classList.remove("active"); //IMAGEN
-  // }
+  imagePopup.classList.remove("active"); //Pop up de la IMAGEN
 }
 
-//cerrar con click!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//cerrar con click
 function closeClickPopup(evt) {
   const isClickInsideForm = evt.target.closest(".form");
 
@@ -101,38 +92,17 @@ function closeClickPopup(evt) {
     closePopup();
   }
 }
-// function closeClickPopup(evt) {
-//   if (!evt.target.classList.contains("box")) {
-//     // closePopup();
-//     console.log(evt);
-//   } else {
-//     closePopup();
-//     console.log(evt);
-//   }
-// }
 
 //EVENTO
 //CERRAR Popups con click
-// closeClickPopup(evt)
 formOutClose.addEventListener("click", closeClickPopup);
 
-//cerrar con ESC----------------------------------------------------------OK
+//cerrar con ESC
 function closeEscPopup(evt) {
   if (evt.key === "Escape") {
     closePopup();
-    // closePopup(evt);
   }
 }
-// Popup para añadir tarjeta+++++++++++++++++++++++++++++++++++++++++++++++!!!
-// --abrir
-// function openPopupAddCard(evt) {
-//   console.log(evt);
-//   popupAddCard.classList.add("active");
-// }
-// --cerrar
-// function closePopupAddCard() {
-//   popupAddCard.classList.remove("active");
-// }
 
 //Cambiar nombre
 //--recolección, asignación y actualización
@@ -149,7 +119,6 @@ function handleSubmit(event) {
 
   //cerrar el Popup
   closePopup();
-  // closePopup(event);
 }
 
 //Función de clonación de tarjeta
@@ -221,9 +190,7 @@ function handleSubmitImage(event) {
   cloneCard(imageTitle, imageUrl);
 
   //cerrar el Popup
-  // closePopupAddCard();
   closePopup();
-  // closePopup(event);
 }
 
 // Popup para expandir imagen
@@ -233,11 +200,6 @@ function openPopupImage(urlImage, titleImage) {
   PopupExpandedImageTitle.textContent = titleImage;
   imagePopup.classList.add("active");
 }
-
-// --cerrar
-// function closePopupImage() {
-//   imagePopup.classList.remove("active");
-// }
 
 //Genera las tarjetas
 initialCards.forEach((item) => {
@@ -264,58 +226,21 @@ buttonClose.addEventListener("click", closePopup);
 //Cambiar nombre
 form.addEventListener("submit", handleSubmit);
 
-// Popup Add Card++++++++++++++++++++++++++++++++++++++++
+// Popup Add Card
 // --abrir
-// buttonAddCard.addEventListener("click", openPopupAddCard);
 buttonAddCard.addEventListener("click", openPopup);
 
 // --cerrar
-// buttonCloseAddCard.addEventListener("click", closePopupAddCard);
 buttonCloseAddCard.addEventListener("click", closePopup);
-// Popup Add Card++++++++++++++++++++++++++++++++++++++++fin
 
 //Añadir una nueva tarjeta
 formCard.addEventListener("submit", handleSubmitImage);
 
 // --cerrar
-// imageClosePopup.addEventListener("click", closePopupImage);
 imageClosePopup.addEventListener("click", closePopup);
 
 //cerrar con ESC
 document.addEventListener("keydown", closeEscPopup);
-
-//////////VALIDATION~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//Solución final de la validación con formularios ?????
-// const textInput = document.querySelector("input[type=text]");
-
-// function callback(evt) {
-//   console.log(`El evento ${evt.type} se ha disparado`);
-// }
-
-// textInput.addEventListener("input", callback);
-// textInput.addEventListener("change", callback);
-
-//Validación de formularios
-// Selecciona todos los elementos del formulario necesarios y los asigna a las constantes
-//NECESITO USAR LAS SELECCION POR BURBUJA!!!!!
-// const formElement = document.querySelector(".form");
-// const formInput = formElement.querySelector(".form__input");
-
-//  const removeTrash = evt.target.closest(".element");
-
-// formElement.addEventListener("submit", function (evt) {
-// Cancela el comportamiento del navegador por defecto
-// evt.preventDefault();
-// });
-
-// Agrega el controlador de eventos input
-// formInput.addEventListener("input", function (evt) {
-// Muestra en la consola los valores de la propiedad validity.valid
-// que pertenece al campo de entrada
-// en el que estamos detectando el evento input
-// console.log(evt.target.validity.valid);
-// });
 
 //NUEVA FUNCION
 enableValidation({

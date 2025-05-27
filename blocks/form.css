@@ -4,7 +4,6 @@
   box-shadow: 0px 0px 25px 0px #00000026;
   box-sizing: border-box;
   padding: 34px 36px 36.51px;
-
   width: 430px;
   aspect-ratio: 1.3;
   border-radius: 10px;
@@ -15,7 +14,6 @@
   color: #000000;
   font-weight: 900;
   font-size: 24px;
-
   margin-bottom: 54px;
 }
 
@@ -37,21 +35,29 @@
   border-color: #c4c4c4;
 }
 
-/* PSEUDOCLASES DE VALIDACIÓN ++++++++++++++++++++++++++++++++++++++*/
-
-/* .form__input:invalid { */
-.form__input_type_error {
-  border-bottom: 1px solid red;
-  /* el borde rojo es para entradas no válidas */
-}
-
+/* Pseudoclase para validación */
 .form__input:valid {
   border-bottom: 1px solid green;
-  /* y el borde verde es para entradas válidas */
 }
-/* PSEUDOCLASES DE VALIDACIÓN ++++++++++++++++++++++++++++++FIN*/
 
-/* .form__submit:valid  { */
+/* Pseudoclase para validación */
+.form__input-error {
+  color: #ff0000;
+  font-size: 12px;
+}
+
+/* Pseudoclase para validación */
+.form__input_type_error {
+  border-bottom: 1px solid red;
+}
+
+/*Recomendación para navegadores que no soporten CSS*/
+.button_inactive {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Pseudoclase para validación */
 .form__submit:valid {
   margin-top: 16px;
   background-color: #000000;
@@ -67,16 +73,7 @@
   opacity: 80%;
 }
 
-/* PSEUDOCLASES DE VALIDACIÓN ++++++++++++++++++++++++++++++++++++++*/
-
-.form__submit:invalid {
-  border: 1px solid red;
-  /* background-color: #ffffff; */
-  /* background-color: blue; */
-  color: #a8a6a6;
-  /* el borde rojo es para entradas no válidas */
-}
-
+/* Pseudoclase para validación */
 .form__submit.button_inactive {
   margin-top: 16px;
   background-color: #000000;
@@ -89,14 +86,10 @@
   opacity: 50%;
 }
 
-/* PSEUDOCLASES DE VALIDACIÓN ++++++++++++++++++++++++++++++FIN*/
-
-/* MODIFICAR ----------------------------------------------- */
 .form__close-button,
 .form__add-card-close-button {
   aspect-ratio: 1;
   width: 32px;
-  /* background-color: black; */
   position: absolute;
   object-fit: cover;
   top: -40px;
@@ -109,8 +102,8 @@
   opacity: 60%;
 }
 
-/* ++++++++++  SMALL  max-width: 800px +++++++++ */
-@media screen and (max-width: 700px) {
+/* ++++++++++  SMALL  max-width: 550px +++++++++ */
+@media screen and (max-width: 550px) {
   .form {
     padding: 25px 22px;
 
@@ -140,15 +133,4 @@
     width: 26px;
     object-fit: scale-down;
   }
-}
-
-/* opcionaL pero recomendado CHGPT ++++++++++++++++++++++++++++++++++++++++*/
-/* .button_inactive {
-  opacity: 0.5;
-  cursor: not-allowed;
-} */
-
-.form__input-error {
-  color: #ff0000;
-  font-size: 12px;
 }

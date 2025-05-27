@@ -1,7 +1,7 @@
-//Lógica de validación++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//Lógica de validación
 
 const showInputError = (formElement, inputElement, errorMessage, config) => {
-  // Cambia la siguiente línea para buscar el span que tenga clase terminada en "-input-error"
+  // Busca el span que tenga clase terminada en "-input-error"
   const errorElement = formElement.querySelector(
     `.${inputElement.id}-input-error`
   );
