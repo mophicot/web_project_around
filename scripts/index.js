@@ -1,3 +1,6 @@
+//importar enableValidation de validation.js
+import { enableValidation } from "./validate.js";
+
 // 1.- SELECCION EN EL DOM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Popup
 const buttonEdit = document.querySelector(".explorer-info__edit");
@@ -29,6 +32,11 @@ const formCard = document.querySelector("#form-new-card");
 const gallery = document.querySelector(".elements");
 const galleryCard = document.querySelector("#card"); // llamada con ID
 
+//para cerrar Popups haciendo click fuera del form
+//chgpt asegurate formOutClose sea un contenedor suficientemente externo
+// (por ejemplo .box) que incluya a los formularios.
+const formOutClose = document.querySelector(".box");
+
 //Arreglo de tarjetas
 const initialCards = [
   {
@@ -58,48 +66,124 @@ const initialCards = [
 ];
 
 //2.- FUNCIONALIDAD~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 // Popup
 // --abrir
-function openPopup() {
-  popup.classList.add("active");
+function openPopup(evt) {
+  if (evt.target.classList.contains("profile-id__add-button-image")) {
+    popupAddCard.classList.add("active");
+  } else {
+    popup.classList.add("active");
+  }
 }
 // --cerrar
+// function closePopup() {
+// popup.classList.remove("active");
+// }
+
+// function closePopup(evt) {
 function closePopup() {
+  // console.log(evt);
+  // if (evt.target.classList.contains("form__add-card-close-button")) {
+  popupAddCard.classList.remove("active");
+  // } else {
   popup.classList.remove("active");
+  imagePopup.classList.remove("active"); //IMAGEN
+  // }
 }
+
+//cerrar con click!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function closeClickPopup(evt) {
+  const isClickInsideForm = evt.target.closest(".form");
+
+  // Si NO se hizo clic dentro de un formulario
+  if (!isClickInsideForm) {
+    closePopup();
+  }
+}
+// function closeClickPopup(evt) {
+//   if (!evt.target.classList.contains("box")) {
+//     // closePopup();
+//     console.log(evt);
+//   } else {
+//     closePopup();
+//     console.log(evt);
+//   }
+// }
+
+//EVENTO
+//CERRAR Popups con click
+// closeClickPopup(evt)
+formOutClose.addEventListener("click", closeClickPopup);
+
+//cerrar con ESC----------------------------------------------------------OK
+function closeEscPopup(evt) {
+  if (evt.key === "Escape") {
+    closePopup();
+    // closePopup(evt);
+  }
+}
+// Popup para añadir tarjeta+++++++++++++++++++++++++++++++++++++++++++++++!!!
+// --abrir
+// function openPopupAddCard(evt) {
+//   console.log(evt);
+//   popupAddCard.classList.add("active");
+// }
+// --cerrar
+// function closePopupAddCard() {
+//   popupAddCard.classList.remove("active");
+// }
 
 //Cambiar nombre
 //--recolección, asignación y actualización
+
 function handleSubmit(event) {
   //evitar que se ejecute el submit
   event.preventDefault();
+
   //guardar datos en value
   const name = nameInput.value;
   const job = jobInput.value;
   explorerName.textContent = name;
   explorerJob.textContent = job;
+
   //cerrar el Popup
   closePopup();
+  // closePopup(event);
 }
 
 //Función de clonación de tarjeta
 function cloneCard(name, link) {
   //los nombres deben coincidir con el arreglo objetivo
+  //clona todo su contenido (con true, incluye los nodos hijos).
+  //Resultado: cardContentClone es una copia lista para personalizar.
   const cardContentClone = galleryCard.content.cloneNode(true);
+
   //nombrando al contenido de la carta clonada (.element__title) como
   //...clonedCardTitle para trabajar con ella
+  //Se busca dentro del clon el elemento con clase .element__title.
+  //Se reemplaza su contenido con el texto que recibe la función como name.
   const clonedCardTitle = cardContentClone.querySelector(".element__title");
   clonedCardTitle.textContent = name;
+
   //lo mismo para link y alt
+  //Se selecciona el elemento de la imagen.
+  //Se le asigna el texto alternativo (alt) y el enlace a la imagen (src).
   const clonedCardUrl = cardContentClone.querySelector(".element__photo"); //clonedCardUrl es un objeto
   clonedCardUrl.alt = name;
   clonedCardUrl.src = link;
-  //botones -- se declaran las funciones DENTRO de la clonación para que ya
-  // ...se clonen con las funciones
+
+  //BOTONES
+  //  -- se declaran las funciones DENTRO de la clonación para que ya
+  // ...se clonen con las tarjetas
   const cardTrash = cardContentClone.querySelector(".element__trash-image");
   const cardLike = cardContentClone.querySelector(".element__like-button");
 
-  //boton de basura
+  //Boton de basura
+  // Se agrega un event listener al botón de eliminar.
+  // evt.target es el botón clicado.
+  // closest(".element") busca el contenedor de la tarjeta.
+  // remove() lo elimina del DOM.
   cardTrash.addEventListener("click", (evt) => {
     //requiere un evento porque busca el más cercano a lo que le das click
     const removeTrash = evt.target.closest(".element"); //target.closest es palabra reservada
@@ -107,6 +191,8 @@ function cloneCard(name, link) {
   });
 
   //boton like
+  // Agrega un event listener al botón de "like".
+  //Al hacer clic, activa o desactiva una clase CSS (toggle), que cambia su estilo visual
   cardLike.addEventListener("click", () => {
     // no requiere evento porque se aplica directamente
     // ... al boton deonde se hace click
@@ -135,6 +221,7 @@ function closePopupAddCard() {
 //--recolección, asignación y actualización
 function handleSubmitImage(event) {
   //evitar que se ejecute el submit
+
   event.preventDefault();
   //guardar datos en value
   const imageTitle = imageTitleInput.value;
@@ -144,7 +231,9 @@ function handleSubmitImage(event) {
   cloneCard(imageTitle, imageUrl);
 
   //cerrar el Popup
-  closePopupAddCard();
+  // closePopupAddCard();
+  closePopup();
+  // closePopup(event);
 }
 
 // Popup para expandir imagen
@@ -156,11 +245,11 @@ function openPopupImage(urlImage, titleImage) {
 }
 
 // --cerrar
-function closePopupImage() {
-  imagePopup.classList.remove("active");
-}
+// function closePopupImage() {
+//   imagePopup.classList.remove("active");
+// }
 
-//genera las tarjetas
+//Genera las tarjetas
 initialCards.forEach((item) => {
   cloneCard(item.name, item.link);
 });
@@ -178,18 +267,72 @@ const PopupExpandedImageTitle = document.querySelector(".image-popup__title");
 // Popup
 // --abrir
 buttonEdit.addEventListener("click", openPopup);
+
 // --cerrar
 buttonClose.addEventListener("click", closePopup);
+
 //Cambiar nombre
 form.addEventListener("submit", handleSubmit);
 
-// Popup Add Card
+// Popup Add Card++++++++++++++++++++++++++++++++++++++++
 // --abrir
-buttonAddCard.addEventListener("click", openPopupAddCard);
+// buttonAddCard.addEventListener("click", openPopupAddCard);
+buttonAddCard.addEventListener("click", openPopup);
+
 // --cerrar
-buttonCloseAddCard.addEventListener("click", closePopupAddCard);
+// buttonCloseAddCard.addEventListener("click", closePopupAddCard);
+buttonCloseAddCard.addEventListener("click", closePopup);
+// Popup Add Card++++++++++++++++++++++++++++++++++++++++fin
 
 //Añadir una nueva tarjeta
 formCard.addEventListener("submit", handleSubmitImage);
 
-imageClosePopup.addEventListener("click", closePopupImage);
+// --cerrar
+// imageClosePopup.addEventListener("click", closePopupImage);
+imageClosePopup.addEventListener("click", closePopup);
+
+//cerrar con ESC
+document.addEventListener("keydown", closeEscPopup);
+
+//////////VALIDATION~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//Solución final de la validación con formularios ?????
+// const textInput = document.querySelector("input[type=text]");
+
+// function callback(evt) {
+//   console.log(`El evento ${evt.type} se ha disparado`);
+// }
+
+// textInput.addEventListener("input", callback);
+// textInput.addEventListener("change", callback);
+
+//Validación de formularios
+// Selecciona todos los elementos del formulario necesarios y los asigna a las constantes
+//NECESITO USAR LAS SELECCION POR BURBUJA!!!!!
+// const formElement = document.querySelector(".form");
+// const formInput = formElement.querySelector(".form__input");
+
+//  const removeTrash = evt.target.closest(".element");
+
+// formElement.addEventListener("submit", function (evt) {
+// Cancela el comportamiento del navegador por defecto
+// evt.preventDefault();
+// });
+
+// Agrega el controlador de eventos input
+// formInput.addEventListener("input", function (evt) {
+// Muestra en la consola los valores de la propiedad validity.valid
+// que pertenece al campo de entrada
+// en el que estamos detectando el evento input
+// console.log(evt.target.validity.valid);
+// });
+
+//NUEVA FUNCION
+enableValidation({
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__submit",
+  inactiveButtonClass: "button_inactive",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__input-error_active",
+});

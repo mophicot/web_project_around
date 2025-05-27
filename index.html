@@ -43,7 +43,7 @@
                 <li class="explorer-info__item">
                   <div class="explorer-info__tag">
                     <h1 class="explorer-info__name-complete">
-                      Jacques Cousteau
+                      Sergio Rangel Ordóñez
                     </h1>
                     <button type="button" class="explorer-info__edit">
                       <img
@@ -56,10 +56,11 @@
                   </div>
                 </li>
                 <li class="explorer-info__item">
-                  <p class="explorer-info__job">Explorador</p>
+                  <p class="explorer-info__job">Matemático & Web Developer</p>
                 </li>
               </ul>
             </div>
+            <!-- NUEVO BOTON ADD CARD -->
             <button class="profile-id__add-button">
               <img
                 src="./images/AddButton.png"
@@ -86,16 +87,16 @@
                 </div>
                 <div class="element__footer">
                   <h2 class="element__title"></h2>
-
                   <button type="button" class="element__like-button"></button>
                 </div>
               </div>
             </template>
           </div>
         </section>
+        <!-- +++++++++++++++++++++EDIT PROFILE+++++POPUP -->
         <section class="box">
           <div class="popup">
-            <form class="form">
+            <form class="form" novalidate>
               <h2 class="form__title">Editar perfil</h2>
               <fieldset class="form__fieldset">
                 <input
@@ -105,7 +106,11 @@
                   name="name"
                   placeholder="Nombre"
                   required
+                  minlength="2"
+                  maxlength="40"
                 />
+                <!-- +span -->
+                <span class="name-input-error form__input-error"></span>
 
                 <input
                   type="text"
@@ -114,9 +119,13 @@
                   name="about"
                   placeholder="Acerca de mí"
                   required
+                  minlength="2"
+                  maxlength="200"
                 />
+                <!-- +span -->
+                <span class="about-input-error form__input-error"></span>
 
-                <button type="submit" class="form__button">Guardar</button>
+                <button type="submit" class="form__submit">Guardar</button>
               </fieldset>
               <img
                 src="./images/CloseIcon.png"
@@ -125,8 +134,9 @@
               />
             </form>
           </div>
+          <!-- NEW FORM+++++++++++++++++++++++++++++++++++++++ -->
           <div class="new-place-popup">
-            <form class="form" id="form-new-card">
+            <form class="form" id="form-new-card" novalidate>
               <h2 class="form__title">Nuevo Lugar</h2>
               <fieldset class="form__fieldset">
                 <input
@@ -136,18 +146,24 @@
                   name="new-place"
                   placeholder="Título"
                   required
+                  minlength="2"
+                  maxlength="30"
                 />
+                <!-- +span -->
+                <span class="new-place-input-error form__input-error"></span>
 
                 <input
-                  type="text"
+                  type="url"
                   class="form__input form__url"
                   id="url"
                   name="url"
                   placeholder="Enlace a la imagen"
                   required
                 />
+                <!-- +span -->
+                <span class="url-input-error form__input-error"></span>
 
-                <button type="submit" class="form__button">Crear</button>
+                <button type="submit" class="form__submit">Crear</button>
               </fieldset>
 
               <img
@@ -176,6 +192,6 @@
         </div>
       </footer>
     </div>
-    <script src="./scripts/index.js"></script>
+    <script src="./scripts/index.js" type="module"></script>
   </body>
 </html>

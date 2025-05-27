@@ -84,7 +84,6 @@
 .image-popup__close-button {
   aspect-ratio: 1;
   width: 32px;
-  background-color: black;
   position: absolute;
   object-fit: cover;
   top: -40px;
