@@ -220,26 +220,154 @@ formCard.addEventListener("submit", handleSubmitImage);
 // --cerrar
 imageClosePopup.addEventListener("click", closePopupImage);
 
-// EVENTO el Popup de la imagen
-// clonedCardUrl.addEventListener("click", () => {
-//   openPopupImage(clonedCardUrl.src, clonedCardUrl.alt);
+//////////VALIDATION~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//Solución final de la validación con formularios ?????
+// const textInput = document.querySelector("input[type=text]");
+
+// function callback(evt) {
+//   console.log(`El evento ${evt.type} se ha disparado`);
+// }
+
+// textInput.addEventListener("input", callback);
+// textInput.addEventListener("change", callback);
+
+//Validación de formularios
+// Selecciona todos los elementos del formulario necesarios y los asigna a las constantes
+//NECESITO USAR LAS SELECCION POR BURBUJA!!!!!
+// const formElement = document.querySelector(".form");
+// const formInput = formElement.querySelector(".form__input");
+
+//  const removeTrash = evt.target.closest(".element");
+
+// formElement.addEventListener("submit", function (evt) {
+// Cancela el comportamiento del navegador por defecto
+// evt.preventDefault();
 // });
 
-//Botón Me Gusta
-// --like
-// buttonLike.addEventListener("click", likeActive);
-// solo funciona para la primera tarjeta
+// Agrega el controlador de eventos input
+// formInput.addEventListener("input", function (evt) {
+// Muestra en la consola los valores de la propiedad validity.valid
+// que pertenece al campo de entrada
+// en el que estamos detectando el evento input
+// console.log(evt.target.validity.valid);
+// });
 
-//++++++++++++++++++++++++++++++++++++++++++CARDS++++++++++++++++++++++
+//Lógica de validación++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add("form__input_type_error");
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add("form__input-error_active");
+};
 
-// const gallery = document.querySelector(".elements");
-// const galleryTemplate = document.querySelector(".card_template");
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove("form__input_type_error");
+  errorElement.classList.remove("form__input-error_active");
+  errorElement.textContent = "";
+};
 
-/* Aquí se aplica el array */
-// function addCards() {
-//   initialCards.forEach((item) => {
-//     const card = createCard(item.name, item.link);
-//     gallery.append(card);
-//     openPopupAdd.classList.remove("popup__add_opened");
-//   });
-// }
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+const toggleButtonState = (inputList, buttonElement) => {
+  //Mejora CHat GPT
+  console.log(hasInvalidInput(inputList));
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add("button_inactive");
+    //mejora CHat GPT para navegadores sin CSS
+    buttonElement.disabled = true;
+  } else {
+    buttonElement.classList.remove("button_inactive");
+    //mejora CHat GPT para navegadores sin CSS
+    buttonElement.disabled = false;
+  }
+};
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll(".form__input"));
+  //PASO 1
+  const buttonElement = formElement.querySelector(".form__submit");
+
+  //PASO 3
+  // Llama a toggleButtonState() antes de empezar a detectar el evento de entrada
+  toggleButtonState(inputList, buttonElement);
+
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", function () {
+      checkInputValidity(formElement, inputElement);
+      //PASO 2
+      // Llama a toggleButtonState() y pásale un array de campos y el botón
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+};
+
+//FUNCION enableValidation ORIGINAL
+// const enableValidation = () => {
+//   const formList = Array.from(document.querySelectorAll(".form"));
+//   formList.forEach((formElement) => {
+//     formElement.addEventListener("submit", function (evt) {
+//       evt.preventDefault();
+//     });
+
+//FUNCION enableValidation CHGPT
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
+
+    // CHAT GPT
+    // Esto no es necesario, porque ya puedes asignar eventos directamente
+    //  al formElement.
+    // El fieldset no contiene el botón submit,
+    // así que formElement.querySelector(".form__submit")
+    //  dentro de setEventListeners() no funcionará correctamente si
+    //  se lo pasas a setEventListeners() como fieldset.
+
+    // const fieldsetList = Array.from(
+    //   formElement.querySelectorAll(".form__fieldset")
+    // );
+
+    // fieldsetList.forEach((fieldset) => {
+    //   setEventListeners(fieldset);
+    // });
+
+    //SUgerencia de Chat GPT
+    setEventListeners(formElement);
+  });
+};
+
+// enableValidation();
+
+// enableValidation({
+//   formSelector: ".popup__form",
+//   inputSelector: ".popup__input",
+//   submitButtonSelector: ".popup__button",
+//   inactiveButtonClass: "popup__button_disabled",
+//   inputErrorClass: "popup__input_type_error",
+//   errorClass: "popup__error_visible",
+// });
+
+enableValidation({
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__submit",
+  inactiveButtonClass: "button_inactive",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__input-error_active",
+});

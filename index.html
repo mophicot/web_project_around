@@ -85,7 +85,6 @@
                 <div class="element__photo-frame">
                   <img src="" alt="" class="element__photo" />
                   <!-- TRASH BOTÓN+++++++++++++++++++++++++++++++++++++++++++ -->
-
                   <button type="button" class="element__trash-button">
                     <img
                       src="./images/Trash.svg"
@@ -97,7 +96,6 @@
                 <div class="element__footer">
                   <h2 class="element__title"></h2>
                   <!-- BOTON ME GUSTA -->
-
                   <button type="button" class="element__like-button"></button>
                 </div>
               </div>
@@ -105,10 +103,10 @@
             <!-- FIN DEL TEMPLATE++++++++++++++++++++++++++++ -->
           </div>
         </section>
-        <!-- +++++++++++++++++++++++++++++++POPUP -->
+        <!-- +++++++++++++++++++++EDIT PROFILE+++++POPUP -->
         <section class="box">
           <div class="popup">
-            <form class="form">
+            <form class="form" novalidate>
               <h2 class="form__title">Editar perfil</h2>
               <fieldset class="form__fieldset">
                 <input
@@ -118,7 +116,11 @@
                   name="name"
                   placeholder="Nombre"
                   required
+                  minlength="2"
+                  maxlength="40"
                 />
+                <!-- +span -->
+                <span class="name-input-error form__input-error"></span>
 
                 <input
                   type="text"
@@ -127,9 +129,13 @@
                   name="about"
                   placeholder="Acerca de mí"
                   required
+                  minlength="2"
+                  maxlength="200"
                 />
+                <!-- +span -->
+                <span class="about-input-error form__input-error"></span>
 
-                <button type="submit" class="form__button">Guardar</button>
+                <button type="submit" class="form__submit">Guardar</button>
               </fieldset>
               <img
                 src="./images/CloseIcon.png"
@@ -140,7 +146,7 @@
           </div>
           <!-- +NEW IMAGE FORM+++++++++++++++++++++++++++++++++++++++ -->
           <div class="new-place-popup">
-            <form class="form" id="form-new-card">
+            <form class="form" id="form-new-card" novalidate>
               <h2 class="form__title">Nuevo Lugar</h2>
               <fieldset class="form__fieldset">
                 <input
@@ -150,18 +156,24 @@
                   name="new-place"
                   placeholder="Título"
                   required
+                  minlength="2"
+                  maxlength="30"
                 />
+                <!-- +span -->
+                <span class="new-place-input-error form__input-error"></span>
 
                 <input
-                  type="text"
+                  type="url"
                   class="form__input form__url"
                   id="url"
                   name="url"
                   placeholder="Enlace a la imagen"
                   required
                 />
+                <!-- +span -->
+                <span class="url-error form__input-error"></span>
 
-                <button type="submit" class="form__button">Crear</button>
+                <button type="submit" class="form__submit">Crear</button>
               </fieldset>
 
               <img
