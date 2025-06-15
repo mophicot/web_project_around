@@ -42,7 +42,7 @@ export class Card {
     return this._element;
   }
 
-  // Configura los eventos internos (like y borrar)
+  // Configura los eventos internos (like 💗 y borrar 🗑️)
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
       this._likeButton.classList.toggle("element__like-button_active");

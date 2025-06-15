@@ -17,7 +17,7 @@ export function closeAllPopups() {
 }
 
 // FUNCIÓN PARA AGREGAR LISTENERS COMUNES DE CIERRE A TODOS LOS POPUPS
-let popupEventsEnabled = false;
+let popupEventsEnabled = false; //variable bandera 🚩 para no volver a añadir los EventListener
 
 export function enablePopupEventListeners() {
   if (popupEventsEnabled) return; // ya se activaron
@@ -33,7 +33,7 @@ export function enablePopupEventListeners() {
   // Cierre con tecla Escape (solo un popup activo)
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-      //se puede usar event.code === 'Escape' que es más consistente entre navegadores.
+      //💡se puede usar event.code === 'Escape' que es más consistente entre navegadores.
       const activePopup = document.querySelector(".popup.active");
       if (activePopup) closePopup(activePopup);
     }

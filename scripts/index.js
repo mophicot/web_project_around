@@ -1,9 +1,9 @@
 // index.js
 
-// ORDEN SUGERIDO 🚧
+// ORDEN 🚧
 // 1. IMPORTS
 // 2. CONSTANTES (selectores, configuración, etc.)
-// 3. FUNCTIONES
+// 3. FUNCIONES
 // 4. EVENT LISTENERS
 
 // 📌1. IMPORTS------------------------------------------------------
@@ -83,22 +83,7 @@ const newPlaceCloseButton = newPlacePopup.querySelector(
   ".form__add-card-close-button"
 );
 
-//📌 3. FUNCTIONES-------------------------------------------------
-// Para TODOS los popups
-// Función para abrir un popup
-// function openPopup(popupElement) {
-//   popupElement.classList.add("active");
-// }
-// // Función para cerrar un popup
-// function closePopup(popupElement) {
-//   popupElement.classList.remove("active");
-// }
-// // Función para cerrar todos los popups activos
-// function closeAllPopups() {
-//   const activePopups = document.querySelectorAll(".popup.active");
-//   activePopups.forEach((popup) => closePopup(popup));
-// }
-
+//📌 3. FUNCIONES-------------------------------------------------
 //Para profilePopup
 //crear la función para abrir el profilePopup
 function openProfilePopup() {
@@ -143,37 +128,7 @@ function openNewPlacePopup() {
   openPopup(newPlacePopup);
 }
 
-// función para crear una tarjeta en el DOM (según el template [id="card"])
-// function createCard(name, link) {
-//   const cardTemplate = document
-//     .querySelector("#card")
-//     .content.querySelector(".element");
-//   const card = cardTemplate.cloneNode(true);
-
-//   const photo = card.querySelector(".element__photo");
-//   const title = card.querySelector(".element__title");
-
-//   photo.src = link;
-//   photo.alt = name;
-//   title.textContent = name;
-
-//   //botón de like 💗 y de borrar 🗑️
-//   const likeButton = card.querySelector(".element__like-button");
-//   const deleteButton = card.querySelector(".element__trash-button");
-//   // funcionalidad
-//   //   Listener para botón Like 💗
-//   likeButton.addEventListener("click", () => {
-//     likeButton.classList.toggle("element__like-button_active");
-//   });
-//   //   Listener para botón borrar 🗑️
-//   deleteButton.addEventListener("click", () => {
-//     card.remove(); // elimina la tarjeta del DOM
-//   });
-
-//   return card;
-// }
-
-// función para crear una tarjeta en el DOM usando clases (según el template [id="card"])
+// función para INSTANCIAR una tarjeta en el DOM usando clases (según el template [id="card"])
 function createCard(name, link) {
   const card = new Card(name, link, "#card");
   return card.createCard();
@@ -195,37 +150,8 @@ function handleSubmitNewPlace(event) {
 
 // 📌 4. EVENT LISTENERS ------------------------------------------
 //Para todos los Popups (profilePopup, imagePopup y newPlacePopup)
-//    cierre universal de popups mediante botón con clase común
-// document.querySelectorAll(".popup__close-button").forEach((closeButton) => {
-//   closeButton.addEventListener("click", () => {
-//     const popup = closeButton.closest(".popup");
-//     closePopup(popup);
-//   });
-//   // en lugar de: buttonCloseProfilePopup.addEventListener("click", closeAllPopups); para c/u
-// });
-
-// Activa los listeners universales para cerrar popups
+// activa los listeners universales para cerrar popups
 enablePopupEventListeners();
-
-// //    cierre de popups con tecla Escape
-// document.addEventListener("keydown", (event) => {
-//   if (event.key === "Escape") {
-//     //💡Si solo vamos a cerrar todos a la vez cambiar X closeAllPopups();
-//     const activePopup = document.querySelector(".popup.active");
-//     if (activePopup) closePopup(activePopup);
-//   }
-// });
-// //    cierre de popups  al hacer clic fuera del contenedor
-// document.querySelectorAll(".popup").forEach((popupElement) => {
-//   //crea un Node list
-//   popupElement.addEventListener("click", (event) => {
-//     if (event.target === popupElement) {
-//       //revisa que el click haya sido
-//       // exactamente en el fondo negro [popupElement correspondiente] y no en sus hijos
-//       closePopup(popupElement);
-//     }
-//   });
-// });
 
 // Para profilePopup
 // conecta el buttonEditProfile con openProfilePopup

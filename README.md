@@ -1,14 +1,21 @@
 # Tripleten web_project_around
 
-1. Nombre del proyecto
+1. NOMBRE DEL PROYECTO
    web_project_around
 
-2. Descripción del proyecto y su funcionalidad.
+2. DESCRIPCIÓN DEL PROYECTO Y SU FUNCIONALIDAD.
 
    Este proyecto es el tercero en contemplar JScript además de la interacción con la página para mostrar distintos lugares alrededor de USA
-   integra la lógica para realizar la validación de los formularios de la página
 
-3. Descripción de las tecnologías y técnicas utilizadas.
+   Esta versión integra la lógica para realizar la validación de los formularios de la página e incorpora el uso de clases para trabajar de froma modular ( Card.js y FormValidator.js). Así mismo se consideran los siguientes aspectos:
+
+   -Encapsulamiento de lógica repetitiva.
+
+   -Desacoplamiento: utils.js no depende de index.js, sino que ofrece herramientas reutilizables.
+
+   -Escalabilidad: Si más adelante agregas más popups, esta estructura ya lo soporta.
+
+3. DESCRIPCIÓN DE LAS TECNOLOGÍAS Y TÉCNICAS UTILIZADAS.
 
    Para este proyecto se añadió la funcionalidad de generar las trajetas de los lugares usando la función template y clonación
 
@@ -25,6 +32,18 @@
    * La funciones de closePopup se refactorizaron en una misma función tanto par editar el perfil, como apra crear nuevas tarjetas
 
    * Se añadió la funcionalidad de cerrar los Popups presionando la tecla "ESC" o haciendo click fuera del formulario (haciendo click en el Popup con la clase .box y usando target y closest para encontrar el formulario y cerrarlo)
+
+   CAMBIOS EN EL SPRINT 10
+
+   - Se refactorizó el código dividiéndolo en 4 módulos:
+
+     1.-Card.js con el código de la clase Card.
+
+     2.-FormValidator.js con el código de la clase FormValidator.
+
+     3.- utils.js con los controladores de eventos y la función que abre/cierra las ventanas modales.
+
+     4.-El archivo index.js contendrá el resto del código, con esto index.js queda libre de lógica innecesaria. Se encarga del flujo general, mientras utils.js administra los detalles técnicos de los popups.
 
 4. Enlace a GitHub Pages
 
