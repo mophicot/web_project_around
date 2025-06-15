@@ -2,19 +2,25 @@
 
 // ORDEN SUGERIDO 🚧
 // 1. IMPORTS
-// 2. CONSTANTS (selectores, configuración, etc.)
-// 3. FUNCTIONS
+// 2. CONSTANTES (selectores, configuración, etc.)
+// 3. FUNCTIONES
 // 4. EVENT LISTENERS
 
 // 📌1. IMPORTS------------------------------------------------------
 //🚀 PASO 1: Importación del módulo de validación
 //importar la clase de FormValidator.js
 import { FormValidator } from "./FormValidator.js";
-
 //importar la clase de Card.js
 import { Card } from "./Card.js";
+//importar lo necesario de utils.js
+import {
+  openPopup,
+  closePopup,
+  closeAllPopups,
+  enablePopupEventListeners,
+} from "./utils.js";
 
-// 📌2. CONSTANTS 📦 Selección de elementos del DOM------------------
+// 📌2. CONSTANTES 📦 Selección de elementos del DOM------------------
 // Popup para editar nombre y perfil [profilePopup]
 const buttonEditProfile = document.querySelector(".explorer-info__edit");
 const buttonCloseProfilePopup = document.querySelector(".form__close-button");
@@ -77,21 +83,21 @@ const newPlaceCloseButton = newPlacePopup.querySelector(
   ".form__add-card-close-button"
 );
 
-//📌 3. FUNCTIONS-------------------------------------------------
+//📌 3. FUNCTIONES-------------------------------------------------
 // Para TODOS los popups
 // Función para abrir un popup
-function openPopup(popupElement) {
-  popupElement.classList.add("active");
-}
-// Función para cerrar un popup
-function closePopup(popupElement) {
-  popupElement.classList.remove("active");
-}
-// Función para cerrar todos los popups activos
-function closeAllPopups() {
-  const activePopups = document.querySelectorAll(".popup.active");
-  activePopups.forEach((popup) => closePopup(popup));
-}
+// function openPopup(popupElement) {
+//   popupElement.classList.add("active");
+// }
+// // Función para cerrar un popup
+// function closePopup(popupElement) {
+//   popupElement.classList.remove("active");
+// }
+// // Función para cerrar todos los popups activos
+// function closeAllPopups() {
+//   const activePopups = document.querySelectorAll(".popup.active");
+//   activePopups.forEach((popup) => closePopup(popup));
+// }
 
 //Para profilePopup
 //crear la función para abrir el profilePopup
@@ -167,6 +173,7 @@ function openNewPlacePopup() {
 //   return card;
 // }
 
+// función para crear una tarjeta en el DOM usando clases (según el template [id="card"])
 function createCard(name, link) {
   const card = new Card(name, link, "#card");
   return card.createCard();
@@ -189,32 +196,36 @@ function handleSubmitNewPlace(event) {
 // 📌 4. EVENT LISTENERS ------------------------------------------
 //Para todos los Popups (profilePopup, imagePopup y newPlacePopup)
 //    cierre universal de popups mediante botón con clase común
-document.querySelectorAll(".popup__close-button").forEach((closeButton) => {
-  closeButton.addEventListener("click", () => {
-    const popup = closeButton.closest(".popup");
-    closePopup(popup);
-  });
-  // en lugar de: buttonCloseProfilePopup.addEventListener("click", closeAllPopups); para c/u
-});
-//    cierre de popups con tecla Escape
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    //💡Si solo vamos a cerrar todos a la vez cambiar X closeAllPopups();
-    const activePopup = document.querySelector(".popup.active");
-    if (activePopup) closePopup(activePopup);
-  }
-});
-//    cierre de popups  al hacer clic fuera del contenedor
-document.querySelectorAll(".popup").forEach((popupElement) => {
-  //crea un Node list
-  popupElement.addEventListener("click", (event) => {
-    if (event.target === popupElement) {
-      //revisa que el click haya sido
-      // exactamente en el fondo negro [popupElement correspondiente] y no en sus hijos
-      closePopup(popupElement);
-    }
-  });
-});
+// document.querySelectorAll(".popup__close-button").forEach((closeButton) => {
+//   closeButton.addEventListener("click", () => {
+//     const popup = closeButton.closest(".popup");
+//     closePopup(popup);
+//   });
+//   // en lugar de: buttonCloseProfilePopup.addEventListener("click", closeAllPopups); para c/u
+// });
+
+// Activa los listeners universales para cerrar popups
+enablePopupEventListeners();
+
+// //    cierre de popups con tecla Escape
+// document.addEventListener("keydown", (event) => {
+//   if (event.key === "Escape") {
+//     //💡Si solo vamos a cerrar todos a la vez cambiar X closeAllPopups();
+//     const activePopup = document.querySelector(".popup.active");
+//     if (activePopup) closePopup(activePopup);
+//   }
+// });
+// //    cierre de popups  al hacer clic fuera del contenedor
+// document.querySelectorAll(".popup").forEach((popupElement) => {
+//   //crea un Node list
+//   popupElement.addEventListener("click", (event) => {
+//     if (event.target === popupElement) {
+//       //revisa que el click haya sido
+//       // exactamente en el fondo negro [popupElement correspondiente] y no en sus hijos
+//       closePopup(popupElement);
+//     }
+//   });
+// });
 
 // Para profilePopup
 // conecta el buttonEditProfile con openProfilePopup
