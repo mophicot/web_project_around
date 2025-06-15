@@ -114,7 +114,7 @@
   opacity: 50%;
 }
 
-.element__like-button-active {
+.element__like-button_active {
   background-image: url("./../images/meGustaActive.png");
 }
 

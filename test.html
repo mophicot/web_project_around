@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Prueba showInputError</title>
+  </head>
+  <body>
+    <!-- <form id="myForm" class="myForm" novalidate>
+      <label for="name">Nombre:</label>
+      <input type="text" class="name" id="name" required minlength="2" />
+      <span class="name-input-error error-message"></span>
+      <button type="submit">Enviar</button>
+    </form> -->
+
+    <!-- //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <form id="formTest" novalidate>
+      <label for="username">Usuario:</label>
+      <input
+        type="text"
+        id="username"
+        class="input-field"
+        required
+        minlength="3"
+      />
+      <span class="username-input-error error-message"></span>
+
+      <label for="email">Correo:</label>
+      <input type="email" id="email" class="input-field" required />
+      <span class="email-input-error error-message"></span>
+
+      <button type="submit" id="submitBtn" class="button-disabled" disabled>
+        Enviar
+      </button>
+    </form>
+
+    <style>
+      /* .input-error {
+        border-color: red;
+      }
+      .error-message {
+        color: red;
+        font-size: 0.8rem;
+      }
+      .error-visible {
+        display: block;
+      } */
+      /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+      .input-error {
+        border-color: red;
+      }
+      .error-visible {
+        color: red;
+        font-size: 0.8rem;
+        display: block;
+      }
+      .error-message {
+        display: none;
+      }
+      .button-disabled {
+        background-color: grey;
+        cursor: not-allowed;
+      }
+    </style>
+
+    <!-- SCRIPT+++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <script>
+      // CONSTANTES---------------------------------------
+      // const form = document.getElementById("myForm");
+      // const inputName = document.getElementById("name");
+
+      // const config = {
+      //   //contiene las calses a añadir al input con error y al span
+      //   inputErrorClass: "input-error",
+      //   errorClass: "error-visible",
+      // };
+
+      // // FUNCIONES----------------------------------
+      // const showInputError = (
+      //   formElement,
+      //   inputElement,
+      //   errorMessage,
+      //   config
+      // ) => {
+      //   const errorElement = formElement.querySelector(
+      //     `.${inputElement.id}-input-error` //busca la clase previamente cargada en el span de forma dinamica
+      //   );
+      //   inputElement.classList.add(config.inputErrorClass); //al elemento input le agrega la clase "input-error"
+      //   errorElement.textContent = errorMessage; //al span lo llena con el errorMessage
+      //   errorElement.classList.add(config.errorClass); //al span le da la clase "error-visible"
+      // };
+
+      // const hideInputError = (formElement, inputElement, config) => {
+      //   const errorElement = formElement.querySelector(
+      //     `.${inputElement.id}-input-error` //busca la clase previamente cargada en el span de forma dinamica
+      //   );
+      //   inputElement.classList.remove(config.inputErrorClass); //al elemento input le quita la clase "input-error"
+      //   errorElement.textContent = ``; //al span lo vacía
+      //   errorElement.classList.remove(config.errorClass); //al span le quita la clase "error-visible"
+      // };
+
+      // //EVENTOS-----------------------------------------------------
+      // form.addEventListener("submit", (evt) => {
+      //   evt.preventDefault();
+      //   if (!inputName.validity.valid) {
+      //     showInputError(form, inputName, "al menos 2", config);
+      //   }
+      // });
+
+      // inputName.addEventListener("input", () => {
+      //   if (inputName.validity.valid) {
+      //     hideInputError(form, inputName, config);
+      //   } else {
+      //     showInputError(form, inputName, "al menos PINCHES 2", config);
+      //   }
+      // });
+
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+      const config = {
+        inputSelector: ".input-field",
+        submitButtonSelector: "#submitBtn",
+        inputErrorClass: "input-error",
+        errorClass: "error-visible",
+        inactiveButtonClass: "button-disabled",
+      };
+
+      function showInputError(formElement, inputElement, errorMessage, config) {
+        const errorElement = formElement.querySelector(
+          `.${inputElement.id}-input-error`
+        );
+        inputElement.classList.add(config.inputErrorClass);
+        errorElement.textContent = errorMessage;
+        errorElement.classList.add(config.errorClass);
+      }
+
+      function hideInputError(formElement, inputElement, config) {
+        const errorElement = formElement.querySelector(
+          `.${inputElement.id}-input-error`
+        );
+        inputElement.classList.remove(config.inputErrorClass);
+        errorElement.textContent = "";
+        errorElement.classList.remove(config.errorClass);
+      }
+
+      function checkInputValidity(formElement, inputElement, config) {
+        if (!inputElement.validity.valid) {
+          showInputError(
+            formElement,
+            inputElement,
+            inputElement.validationMessage,
+            config
+          );
+        } else {
+          hideInputError(formElement, inputElement, config);
+        }
+      }
+
+      function hasInvalidInput(inputList) {
+        return inputList.some((inputElement) => !inputElement.validity.valid);
+      }
+
+      function toggleButtonState(inputList, buttonElement, config) {
+        if (hasInvalidInput(inputList)) {
+          buttonElement.classList.add(config.inactiveButtonClass);
+          buttonElement.disabled = true;
+        } else {
+          buttonElement.classList.remove(config.inactiveButtonClass);
+          buttonElement.disabled = false;
+        }
+      }
+
+      function setEventListeners(formElement, config) {
+        const inputList = Array.from(
+          formElement.querySelectorAll(config.inputSelector)
+        );
+        const buttonElement = formElement.querySelector(
+          config.submitButtonSelector
+        );
+
+        toggleButtonState(inputList, buttonElement, config);
+
+        inputList.forEach((inputElement) => {
+          inputElement.addEventListener("input", () => {
+            checkInputValidity(formElement, inputElement, config);
+            toggleButtonState(inputList, buttonElement, config);
+          });
+        });
+      }
+
+      // Inicialización
+      const form = document.getElementById("formTest");
+      setEventListeners(form, config);
+
+      // Prevenir submit real para prueba
+      form.addEventListener("submit", (e) => e.preventDefault());
+    </script>
+  </body>
+</html>

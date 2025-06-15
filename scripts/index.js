@@ -1,3 +1,4 @@
+//index.js
 //importar enableValidation de validation.js
 import { enableValidation } from "./validate.js";
 

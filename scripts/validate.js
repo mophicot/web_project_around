@@ -1,3 +1,4 @@
+// validate.js
 //Lógica de validación
 
 const showInputError = (formElement, inputElement, errorMessage, config) => {
