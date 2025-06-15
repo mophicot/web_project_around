@@ -1,8 +1,5 @@
 //index2.js
 
-// _NOTYET🚧
-//🎯
-
 // ORDEN SUGERIDO 🚧
 // 1. IMPORTS
 // 2. CONSTANTS (selectores, configuración, etc.)

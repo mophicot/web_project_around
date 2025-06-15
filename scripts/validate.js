@@ -87,3 +87,20 @@ export const enableValidation = (config) => {
     setEventListeners(formElement, config);
   });
 };
+
+// | Emoji | Significado / Uso                                                   | Ejemplo de comentario                      |
+// | ----- | ------------------------------------------------------------------- | ------------------------------------------ |
+// | 🔧    | Función o sección relacionada con “herramientas” o ajustes técnicos | `// 🔧 Función para mostrar errores`       |
+// | 🔍    | Función o proceso de búsqueda, verificación o validación            | `// 🔍 Validar campo individual`           |
+// | ✅     | Algo que está correcto, exitoso o que se validó bien                | `// ✅ Validación exitosa`                  |
+// | 🛠️   | Proceso de construcción, ajustes o configuración                    | `// 🛠️ Configuración de listeners`        |
+// | 🚀    | Función principal o la que inicia un proceso                        | `// 🚀 Inicializar validación`             |
+// | ⚠️    | Advertencia, punto crítico o algo que se debe revisar               | `// ⚠️ Requiere revisión`                  |
+// | 💡    | Idea, consejo o recordatorio                                        | `// 💡 Mejorar rendimiento aquí`           |
+// | 🔄    | Ciclo, repetición o actualización                                   | `// 🔄 Actualizar estado`                  |
+// | 📌    | Punto importante, referencia o anclaje                              | `// 📌 Nota importante sobre esta función` |
+// | 🔥    | Código crítico o que necesita atención urgente                      | `// 🔥 Este bloque es sensible`            |
+// | 🎯    | Objetivo, meta o función clave                                      | `// 🎯 Función principal de validación`    |
+
+// _NOTYET🚧
+//🎯
