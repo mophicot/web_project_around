@@ -1,44 +1,43 @@
-//index.js
+// index.js
+
+// ORDEN SUGERIDO 🚧
+// 1. IMPORTS
+// 2. CONSTANTS (selectores, configuración, etc.)
+// 3. FUNCTIONS
+// 4. EVENT LISTENERS
+
+// 📌1. IMPORTS------------------------------------------------------
+//🚀 PASO 1: Importación del módulo de validación
 //importar enableValidation de validation.js
-import { enableValidation } from "./validate.js";
+// import { enableValidation } from "./validate.js";
+// import { enableValidation } from "./validation.js";
+import { FormValidator } from "./FormValidator.js";
 
-// 1.- SELECCION EN EL DOM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Popup
-const buttonEdit = document.querySelector(".explorer-info__edit");
-const buttonClose = document.querySelector(".form__close-button");
-const popup = document.querySelector(".popup");
+// 📌2. CONSTANTS 📦 Selección de elementos del DOM------------------
+// Popup para editar nombre y perfil [profilePopup]
+const buttonEditProfile = document.querySelector(".explorer-info__edit");
+const buttonCloseProfilePopup = document.querySelector(".form__close-button");
+const profilePopup = document.querySelector(".profile-popup");
+// seleccionar los inputs y los elementos que muestran el nombre
+//  y la ocupación en el perfil
+// 📄 Formulario y campos de entrada
+const form = document.querySelector(".form"); // El formulario
+const nameInput = document.querySelector(".form__name"); // Input para nombre
+const jobInput = document.querySelector(".form__job"); // Input para ocupación
+// elementos donde se mostrará la información
+const explorerName = document.querySelector(".explorer-info__name-complete"); // Donde se muestra el nombre
+const explorerJob = document.querySelector(".explorer-info__job"); // Donde se muestra la ocupación
 
-//Cambiar nombre
-const form = document.querySelector(".form");
-const nameInput = document.querySelector(".form__name");
-const jobInput = document.querySelector(".form__job");
-const explorerName = document.querySelector(".explorer-info__name-complete");
-const explorerJob = document.querySelector(".explorer-info__job");
-
-// NUEVA CARTA
-//Popup form para nueva card
-const buttonAddCard = document.querySelector(".profile-id__add-button");
-const buttonCloseAddCard = document.querySelector(
-  ".form__add-card-close-button"
+// Popup de imagen expandida y sus elementos [imagePopup]
+const imagePopup = document.querySelector(".image-popup");
+const imagePopupPhoto = imagePopup.querySelector(".image-popup__photo");
+const imagePopupTitle = imagePopup.querySelector(".image-popup__title");
+const imagePopupCloseButton = imagePopup.querySelector(
+  ".image-popup__close-button"
 );
-const popupAddCard = document.querySelector(".new-place-popup");
-
-//cambiar imagen y titulo con URL
-//SE MANDA A LLAMAR POR ID, NO POR CLASE PARA REUTILIZAR EL CÓDIGO
-const imageTitleInput = document.querySelector("#new-place");
-const imageUrlInput = document.querySelector("#url");
-const formCard = document.querySelector("#form-new-card");
-
-//Template
-const gallery = document.querySelector(".elements");
-const galleryCard = document.querySelector("#card"); // llamada con ID
-
-//para cerrar Popups haciendo click fuera del form
-//chgpt asegurate formOutClose sea un contenedor suficientemente externo
-// (por ejemplo .box) que incluya a los formularios.
-const formOutClose = document.querySelector(".box");
-
-//Arreglo de tarjetas
+// contenedor padre de tarjetas
+const placesContainer = document.querySelector(".elements"); //necesario tmb para newPlacePopup
+//  arreglo inicial de tarjetas
 const initialCards = [
   {
     name: "Valle de Yosemite",
@@ -66,189 +65,179 @@ const initialCards = [
   },
 ];
 
-//2.- FUNCIONALIDAD~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Popup para agregar nueva tarjeta [newPlacePopup]
+const buttonAddCard = document.querySelector(".profile-id__add-button"); // botón "+"
+const newPlacePopup = document.querySelector(".new-place-popup");
+// 📄 Formulario y campos de entrada
+const newPlaceForm = newPlacePopup.querySelector("#form-new-card");
+const newPlaceInputTitle = newPlacePopup.querySelector(".form__new-place");
+const newPlaceInputUrl = newPlacePopup.querySelector(".form__url");
+const newPlaceCloseButton = newPlacePopup.querySelector(
+  ".form__add-card-close-button"
+);
 
-// Popup
-// --abrir
-function openPopup(evt) {
-  if (evt.target.classList.contains("profile-id__add-button-image")) {
-    popupAddCard.classList.add("active");
-  } else {
-    popup.classList.add("active");
-  }
+//📌 3. FUNCTIONS-------------------------------------------------
+// Para TODOS los popups
+// función que cierra todos los popups activos
+function closeAllPopups() {
+  const allPopups = document.querySelectorAll(".popup");
+  allPopups.forEach((popup) => popup.classList.remove("active"));
+  // en lugar de " profilePopup.classList.remove("active");... etc, para c/u "
 }
 
-function closePopup() {
-  popupAddCard.classList.remove("active");
-  popup.classList.remove("active");
-  imagePopup.classList.remove("active"); //Pop up de la IMAGEN
+//Para profilePopup
+//crear la función para abrir el profilePopup
+function openProfilePopup() {
+  // inicializar el formulario con datos actuales
+  nameInput.value = explorerName.textContent;
+  jobInput.value = explorerJob.textContent;
+
+  profilePopup.classList.add("active");
 }
-
-//cerrar con click
-function closeClickPopup(evt) {
-  const isClickInsideForm = evt.target.closest(".form");
-
-  // Si NO se hizo clic dentro de un formulario
-  if (!isClickInsideForm) {
-    closePopup();
-  }
-}
-
-//EVENTO
-//CERRAR Popups con click
-formOutClose.addEventListener("click", closeClickPopup);
-
-//cerrar con ESC
-function closeEscPopup(evt) {
-  if (evt.key === "Escape") {
-    closePopup();
-  }
-}
-
-//Cambiar nombre
-//--recolección, asignación y actualización
-
-function handleSubmit(event) {
-  //evitar que se ejecute el submit
+// manejar el formulario para cambiar el nombre y ocupación
+function handleSubmitProfile(event) {
   event.preventDefault();
-
-  //guardar datos en value
+  // inicializar con los valores actuales
   const name = nameInput.value;
   const job = jobInput.value;
+  //paso intermedio para asignación, es opcional
+  // pero puede ser útil en depuración [ej: console.log(name)]
   explorerName.textContent = name;
   explorerJob.textContent = job;
 
-  //cerrar el Popup
-  closePopup();
+  closeAllPopups();
 }
 
-//Función de clonación de tarjeta
-function cloneCard(name, link) {
-  //los nombres deben coincidir con el arreglo objetivo
-  //clona todo su contenido (con true, incluye los nodos hijos).
-  //Resultado: cardContentClone es una copia lista para personalizar.
-  const cardContentClone = galleryCard.content.cloneNode(true);
+//Para imagePopup
+//  función para abrir el imagePopup con la foto y título recibidos
+function openImagePopup(name, link) {
+  //   para evitar que el popup se abra antes de que la imagen cargue
+  imagePopupPhoto.onload = () => {
+    imagePopup.classList.add("active");
+  };
 
-  //nombrando al contenido de la carta clonada (.element__title) como
-  //...clonedCardTitle para trabajar con ella
-  //Se busca dentro del clon el elemento con clase .element__title.
-  //Se reemplaza su contenido con el texto que recibe la función como name.
-  const clonedCardTitle = cardContentClone.querySelector(".element__title");
-  clonedCardTitle.textContent = name;
-
-  //lo mismo para link y alt
-  //Se selecciona el elemento de la imagen.
-  //Se le asigna el texto alternativo (alt) y el enlace a la imagen (src).
-  const clonedCardUrl = cardContentClone.querySelector(".element__photo"); //clonedCardUrl es un objeto
-  clonedCardUrl.alt = name;
-  clonedCardUrl.src = link;
-
-  //BOTONES
-  //  -- se declaran las funciones DENTRO de la clonación para que ya
-  // ...se clonen con las tarjetas
-  const cardTrash = cardContentClone.querySelector(".element__trash-image");
-  const cardLike = cardContentClone.querySelector(".element__like-button");
-
-  //Boton de basura
-  // Se agrega un event listener al botón de eliminar.
-  // evt.target es el botón clicado.
-  // closest(".element") busca el contenedor de la tarjeta.
-  // remove() lo elimina del DOM.
-  cardTrash.addEventListener("click", (evt) => {
-    //requiere un evento porque busca el más cercano a lo que le das click
-    const removeTrash = evt.target.closest(".element"); //target.closest es palabra reservada
-    removeTrash.remove(); //remove tambien es palabra reservada
-  });
-
-  //boton like
-  // Agrega un event listener al botón de "like".
-  //Al hacer clic, activa o desactiva una clase CSS (toggle), que cambia su estilo visual
-  cardLike.addEventListener("click", () => {
-    // no requiere evento porque se aplica directamente
-    // ... al boton deonde se hace click
-    cardLike.classList.toggle("element__like-button-active");
-  });
-
-  //ATRIBUTOS PARA LA NUEVA ARJETA DESDE FORM
-  clonedCardUrl.addEventListener("click", () => {
-    openPopupImage(clonedCardUrl.src, clonedCardUrl.alt);
-  });
-
-  gallery.prepend(cardContentClone); //mete la carta clonada al inicio de la galería
+  imagePopupPhoto.src = link;
+  imagePopupPhoto.alt = name;
+  imagePopupTitle.textContent = name;
 }
 
-//AGREGAR IMAGEN Y Cambiar nombre
-//--recolección, asignación y actualización
-function handleSubmitImage(event) {
-  //evitar que se ejecute el submit
+//Para newPlacePopup
+//  función para abrir el newPlacePopup para agregar una nueva tarjeta[+]
+function openNewPlacePopup() {
+  newPlaceForm.reset(); // limpia formulario para agregar tarjeta nueva
+  newPlacePopup.classList.add("active");
+}
+// función para crear una tarjeta en el DOM (según el template [id="card"])
+function createCard(name, link) {
+  const cardTemplate = document
+    .querySelector("#card")
+    .content.querySelector(".element");
+  const card = cardTemplate.cloneNode(true);
 
+  const photo = card.querySelector(".element__photo");
+  const title = card.querySelector(".element__title");
+
+  photo.src = link;
+  photo.alt = name;
+  title.textContent = name;
+
+  //botón de like 💗 y de borrar 🗑️
+  const likeButton = card.querySelector(".element__like-button");
+  const deleteButton = card.querySelector(".element__trash-button");
+  // funcionalidad
+  //   Listener para botón Like 💗
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("element__like-button_active");
+  });
+  //   Listener para botón borrar 🗑️
+  deleteButton.addEventListener("click", () => {
+    card.remove(); // elimina la tarjeta del DOM
+  });
+
+  return card;
+}
+//función para manejar el envío del formulario nuevo lugar
+function handleSubmitNewPlace(event) {
   event.preventDefault();
-  //guardar datos en value
-  const imageTitle = imageTitleInput.value;
-  const imageUrl = imageUrlInput.value;
 
-  //Clonado de la nueva tarjeta
-  cloneCard(imageTitle, imageUrl);
+  const title = newPlaceInputTitle.value;
+  const url = newPlaceInputUrl.value;
 
-  //cerrar el Popup
-  closePopup();
+  // Crear nueva tarjeta y agregarla al contenedor
+  const newCard = createCard(title, url);
+  placesContainer.prepend(newCard);
+
+  closeAllPopups();
 }
 
-// Popup para expandir imagen
-// --abrir
-function openPopupImage(urlImage, titleImage) {
-  PopupExpandedImage.src = urlImage;
-  PopupExpandedImageTitle.textContent = titleImage;
-  imagePopup.classList.add("active");
-}
+// 📌 4. EVENT LISTENERS ------------------------------------------
+//Para todos los Popups (profilePopup, imagePopup y newPlacePopup)
+//    cierre universal de popups mediante botón con clase común
+document.querySelectorAll(".popup__close-button").forEach((closeButton) => {
+  closeButton.addEventListener("click", closeAllPopups);
+  // en lugar de: buttonCloseProfilePopup.addEventListener("click", closeAllPopups); para c/u
+});
+//    cierre de popups con tecla Escape
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeAllPopups();
+  }
+});
+//    cierre de popups  al hacer clic fuera del contenedor
+document.querySelectorAll(".popup").forEach((popupElement) => {
+  //crea un Node list
+  popupElement.addEventListener("click", (event) => {
+    if (event.target === popupElement) {
+      //revisa que el click haya sido
+      // exactamente en el fondo negro [popupElement correspondiente] y no en sus hijos
+      closeAllPopups();
+    }
+  });
+});
+
+// Para profilePopup
+// conecta el buttonEditProfile con openProfilePopup
+buttonEditProfile.addEventListener("click", openProfilePopup);
+// conecta el evento submit del formulario [click en el botón] con handleSubmit:
+form.addEventListener("submit", handleSubmitProfile);
+
+// Para imagePopup
+//  añade listener para cerrar el imagePopup
+placesContainer.addEventListener("click", (event) => {
+  // verificar si el click fue en una imagen
+  if (event.target.classList.contains("element__photo")) {
+    const cardElement = event.target.closest(".element");
+    const name = cardElement.querySelector(".element__title").textContent;
+    const link = event.target.src;
+
+    openImagePopup(name, link);
+  }
+});
+
+//Para newPlacePopup
+// abrir popup "Agregar tarjeta" al hacer click en botón "+"
+buttonAddCard.addEventListener("click", openNewPlacePopup);
+// manejar el submit del formulario para agregar tarjeta
+newPlaceForm.addEventListener("submit", handleSubmitNewPlace);
 
 //Genera las tarjetas
 initialCards.forEach((item) => {
-  cloneCard(item.name, item.link);
+  const card = createCard(item.name, item.link);
+  placesContainer.append(card);
 });
 
-// declaración de constantes para IMAGEN EXPANDIDA
-//Popup imagen emergente
-const imageOpenPopup = document.querySelector(".element__photo"); //abre el popup
-const imageClosePopup = document.querySelector(".image-popup__close-button");
-const imagePopup = document.querySelector(".image-popup");
-const PopupExpandedImage = document.querySelector(".image-popup__photo");
-const PopupExpandedImageTitle = document.querySelector(".image-popup__title");
-
-//3.- AÑADIR EVENTOS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-// Popup
-// --abrir
-buttonEdit.addEventListener("click", openPopup);
-
-// --cerrar
-buttonClose.addEventListener("click", closePopup);
-
-//Cambiar nombre
-form.addEventListener("submit", handleSubmit);
-
-// Popup Add Card
-// --abrir
-buttonAddCard.addEventListener("click", openPopup);
-
-// --cerrar
-buttonCloseAddCard.addEventListener("click", closePopup);
-
-//Añadir una nueva tarjeta
-formCard.addEventListener("submit", handleSubmitImage);
-
-// --cerrar
-imageClosePopup.addEventListener("click", closePopup);
-
-//cerrar con ESC
-document.addEventListener("keydown", closeEscPopup);
-
-//NUEVA FUNCION
-enableValidation({
+const config = {
   formSelector: ".form",
   inputSelector: ".form__input",
   submitButtonSelector: ".form__submit",
   inactiveButtonClass: "button_inactive",
   inputErrorClass: "form__input_type_error",
   errorClass: "form__input-error_active",
+};
+
+const formList = Array.from(document.querySelectorAll(config.formSelector));
+
+formList.forEach((formElement) => {
+  const validator = new FormValidator(config, formElement);
+  validator.enableValidation();
 });
