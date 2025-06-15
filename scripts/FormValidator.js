@@ -103,4 +103,4 @@ export class FormValidator {
 
     this._setEventListeners(); // Añadir los listeners al formulario de la instancia
   }
-} // FIN DE FormValidator
+} // FIN DE LA CLASE FormValidator

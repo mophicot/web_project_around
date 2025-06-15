@@ -8,10 +8,11 @@
 
 // 📌1. IMPORTS------------------------------------------------------
 //🚀 PASO 1: Importación del módulo de validación
-//importar enableValidation de validation.js
-// import { enableValidation } from "./validate.js";
-// import { enableValidation } from "./validation.js";
+//importar la clase de FormValidator.js
 import { FormValidator } from "./FormValidator.js";
+
+//importar la clase de Card.js
+import { Card } from "./Card.js";
 
 // 📌2. CONSTANTS 📦 Selección de elementos del DOM------------------
 // Popup para editar nombre y perfil [profilePopup]
@@ -21,7 +22,7 @@ const profilePopup = document.querySelector(".profile-popup");
 // seleccionar los inputs y los elementos que muestran el nombre
 //  y la ocupación en el perfil
 // 📄 Formulario y campos de entrada
-const form = document.querySelector(".form"); // El formulario
+const profileForm = document.querySelector(".form"); // El formulario
 const nameInput = document.querySelector(".form__name"); // Input para nombre
 const jobInput = document.querySelector(".form__job"); // Input para ocupación
 // elementos donde se mostrará la información
@@ -78,11 +79,18 @@ const newPlaceCloseButton = newPlacePopup.querySelector(
 
 //📌 3. FUNCTIONS-------------------------------------------------
 // Para TODOS los popups
-// función que cierra todos los popups activos
+// Función para abrir un popup
+function openPopup(popupElement) {
+  popupElement.classList.add("active");
+}
+// Función para cerrar un popup
+function closePopup(popupElement) {
+  popupElement.classList.remove("active");
+}
+// Función para cerrar todos los popups activos
 function closeAllPopups() {
-  const allPopups = document.querySelectorAll(".popup");
-  allPopups.forEach((popup) => popup.classList.remove("active"));
-  // en lugar de " profilePopup.classList.remove("active");... etc, para c/u "
+  const activePopups = document.querySelectorAll(".popup.active");
+  activePopups.forEach((popup) => closePopup(popup));
 }
 
 //Para profilePopup
@@ -92,7 +100,7 @@ function openProfilePopup() {
   nameInput.value = explorerName.textContent;
   jobInput.value = explorerJob.textContent;
 
-  profilePopup.classList.add("active");
+  openPopup(profilePopup);
 }
 // manejar el formulario para cambiar el nombre y ocupación
 function handleSubmitProfile(event) {
@@ -111,6 +119,7 @@ function handleSubmitProfile(event) {
 //Para imagePopup
 //  función para abrir el imagePopup con la foto y título recibidos
 function openImagePopup(name, link) {
+  imagePopupPhoto.onload = null; // limpia el handler antes de asignar
   //   para evitar que el popup se abra antes de que la imagen cargue
   imagePopupPhoto.onload = () => {
     imagePopup.classList.add("active");
@@ -125,37 +134,44 @@ function openImagePopup(name, link) {
 //  función para abrir el newPlacePopup para agregar una nueva tarjeta[+]
 function openNewPlacePopup() {
   newPlaceForm.reset(); // limpia formulario para agregar tarjeta nueva
-  newPlacePopup.classList.add("active");
+  openPopup(newPlacePopup);
 }
+
 // función para crear una tarjeta en el DOM (según el template [id="card"])
+// function createCard(name, link) {
+//   const cardTemplate = document
+//     .querySelector("#card")
+//     .content.querySelector(".element");
+//   const card = cardTemplate.cloneNode(true);
+
+//   const photo = card.querySelector(".element__photo");
+//   const title = card.querySelector(".element__title");
+
+//   photo.src = link;
+//   photo.alt = name;
+//   title.textContent = name;
+
+//   //botón de like 💗 y de borrar 🗑️
+//   const likeButton = card.querySelector(".element__like-button");
+//   const deleteButton = card.querySelector(".element__trash-button");
+//   // funcionalidad
+//   //   Listener para botón Like 💗
+//   likeButton.addEventListener("click", () => {
+//     likeButton.classList.toggle("element__like-button_active");
+//   });
+//   //   Listener para botón borrar 🗑️
+//   deleteButton.addEventListener("click", () => {
+//     card.remove(); // elimina la tarjeta del DOM
+//   });
+
+//   return card;
+// }
+
 function createCard(name, link) {
-  const cardTemplate = document
-    .querySelector("#card")
-    .content.querySelector(".element");
-  const card = cardTemplate.cloneNode(true);
-
-  const photo = card.querySelector(".element__photo");
-  const title = card.querySelector(".element__title");
-
-  photo.src = link;
-  photo.alt = name;
-  title.textContent = name;
-
-  //botón de like 💗 y de borrar 🗑️
-  const likeButton = card.querySelector(".element__like-button");
-  const deleteButton = card.querySelector(".element__trash-button");
-  // funcionalidad
-  //   Listener para botón Like 💗
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("element__like-button_active");
-  });
-  //   Listener para botón borrar 🗑️
-  deleteButton.addEventListener("click", () => {
-    card.remove(); // elimina la tarjeta del DOM
-  });
-
-  return card;
+  const card = new Card(name, link, "#card");
+  return card.createCard();
 }
+
 //función para manejar el envío del formulario nuevo lugar
 function handleSubmitNewPlace(event) {
   event.preventDefault();
@@ -174,13 +190,18 @@ function handleSubmitNewPlace(event) {
 //Para todos los Popups (profilePopup, imagePopup y newPlacePopup)
 //    cierre universal de popups mediante botón con clase común
 document.querySelectorAll(".popup__close-button").forEach((closeButton) => {
-  closeButton.addEventListener("click", closeAllPopups);
+  closeButton.addEventListener("click", () => {
+    const popup = closeButton.closest(".popup");
+    closePopup(popup);
+  });
   // en lugar de: buttonCloseProfilePopup.addEventListener("click", closeAllPopups); para c/u
 });
 //    cierre de popups con tecla Escape
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
-    closeAllPopups();
+    //💡Si solo vamos a cerrar todos a la vez cambiar X closeAllPopups();
+    const activePopup = document.querySelector(".popup.active");
+    if (activePopup) closePopup(activePopup);
   }
 });
 //    cierre de popups  al hacer clic fuera del contenedor
@@ -190,7 +211,7 @@ document.querySelectorAll(".popup").forEach((popupElement) => {
     if (event.target === popupElement) {
       //revisa que el click haya sido
       // exactamente en el fondo negro [popupElement correspondiente] y no en sus hijos
-      closeAllPopups();
+      closePopup(popupElement);
     }
   });
 });
@@ -199,7 +220,7 @@ document.querySelectorAll(".popup").forEach((popupElement) => {
 // conecta el buttonEditProfile con openProfilePopup
 buttonEditProfile.addEventListener("click", openProfilePopup);
 // conecta el evento submit del formulario [click en el botón] con handleSubmit:
-form.addEventListener("submit", handleSubmitProfile);
+profileForm.addEventListener("submit", handleSubmitProfile);
 
 // Para imagePopup
 //  añade listener para cerrar el imagePopup
