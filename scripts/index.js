@@ -21,14 +21,23 @@ import {
 } from "./utils.js";
 
 // 📌2. CONSTANTES 📦 Selección de elementos del DOM------------------
+//Validación de formularios
+const config = {
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__submit",
+  inactiveButtonClass: "button_inactive",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__input-error_active",
+};
+const formList = Array.from(document.querySelectorAll(config.formSelector));
 // Popup para editar nombre y perfil [profilePopup]
 const buttonEditProfile = document.querySelector(".explorer-info__edit");
-const buttonCloseProfilePopup = document.querySelector(".form__close-button");
 const profilePopup = document.querySelector(".profile-popup");
 // seleccionar los inputs y los elementos que muestran el nombre
 //  y la ocupación en el perfil
 // 📄 Formulario y campos de entrada
-const profileForm = document.querySelector(".form"); // El formulario
+const profileForm = document.querySelector("#form-edit-profile"); // El formulario
 const nameInput = document.querySelector(".form__name"); // Input para nombre
 const jobInput = document.querySelector(".form__job"); // Input para ocupación
 // elementos donde se mostrará la información
@@ -39,9 +48,7 @@ const explorerJob = document.querySelector(".explorer-info__job"); // Donde se m
 const imagePopup = document.querySelector(".image-popup");
 const imagePopupPhoto = imagePopup.querySelector(".image-popup__photo");
 const imagePopupTitle = imagePopup.querySelector(".image-popup__title");
-const imagePopupCloseButton = imagePopup.querySelector(
-  ".image-popup__close-button"
-);
+
 // contenedor padre de tarjetas
 const placesContainer = document.querySelector(".elements"); //necesario tmb para newPlacePopup
 //  arreglo inicial de tarjetas
@@ -79,9 +86,6 @@ const newPlacePopup = document.querySelector(".new-place-popup");
 const newPlaceForm = newPlacePopup.querySelector("#form-new-card");
 const newPlaceInputTitle = newPlacePopup.querySelector(".form__new-place");
 const newPlaceInputUrl = newPlacePopup.querySelector(".form__url");
-const newPlaceCloseButton = newPlacePopup.querySelector(
-  ".form__add-card-close-button"
-);
 
 //📌 3. FUNCIONES-------------------------------------------------
 //Para profilePopup
@@ -104,6 +108,7 @@ function handleSubmitProfile(event) {
   explorerName.textContent = name;
   explorerJob.textContent = job;
 
+  // console.log(`Perfil actualizado a: ${name} / ${job}`); //para depuración
   closeAllPopups();
 }
 
@@ -145,6 +150,7 @@ function handleSubmitNewPlace(event) {
   const newCard = createCard(title, url);
   placesContainer.prepend(newCard);
 
+  newPlaceForm.reset(); // limpia formulario para agregar tarjeta nueva
   closeAllPopups();
 }
 
@@ -183,17 +189,6 @@ initialCards.forEach((item) => {
   const card = createCard(item.name, item.link);
   placesContainer.append(card);
 });
-
-const config = {
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__submit",
-  inactiveButtonClass: "button_inactive",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__input-error_active",
-};
-
-const formList = Array.from(document.querySelectorAll(config.formSelector));
 
 formList.forEach((formElement) => {
   const validator = new FormValidator(config, formElement);
